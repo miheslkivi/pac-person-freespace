@@ -1,7 +1,7 @@
 
 /* This file is derived from Qt4 example software "Ported Asteroids" and examples on getopt.h man page
 *
-*  Pac-person freespace continuum undiscreted ( PPFCU or p-pf-scu-d ) - Copyright (C) 2018 by
+*  Pac-person freespace continuum undiscreted ( PPFCU or p-pf-scu-d ) - Copyright (C) 2018 by Mikko Heiska
 *
 *
 */
