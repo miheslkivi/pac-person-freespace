@@ -1,0 +1,8 @@
+ ghost busted
+ ghost spinned
+ pacperson killed, reason: out of fuel
+ pacperson killed, reason: traffic collision
+ pacperson killed, reason: ghost
+ press F1 for help
+invalid line 1
+invalid line 2

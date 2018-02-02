@@ -1,0 +1,48 @@
+
+start the display program after this
+
+ command line options:
+
+add "--" prefix
+
+example:
+
+./pacman  --width 1500 --height 780 --arena_picture pacman-back.png --overlay_picture  pacman-back-overlay2.png
+
+partial words may work:
+
+./pacman  --widt 1500 --heig 780 --arena_pictu pacman-back.png --overlay_pic  pacman-back-overlay2.png
+
+   "width" ( 1920 )
+     "height" ( 1080 )
+
+     "no-faulty-missiles"
+     "nofaultymissiles"
+     "scalefactor" 
+    "no-trail"
+    "notrail"
+    "trail"
+
+     "pacx" ( 1234 )
+     "pacy" ( 1234 )
+
+     "ghostx" ( 1234 )
+     "ghosty" ( 1234 )
+
+     "arena_picture" ( x.png )
+     "overlay_picture" ( x-overlay.png )
+     "configfile" ( x.ini )
+
+     "ghosts" ( 150 )
+
+     "drivemode"
+
+     "colorname" ( yellow  ) ( "#ffdd00" )
+    "pacangle" ( 90 )
+    "openglon"
+    "opengloff"
+
+    "fullscreen"
+    "ghostshide"
+    "ghosts_hide"
+
