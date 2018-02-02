@@ -3,7 +3,7 @@
 * date appears to be 10 April 2014, but may be much older
 *
 * This file is now also part of "Pac-person freespace continuum undiscreted"
-* ( PPFCU or p-pf-scu-d ) - Copyright (C) 2018 by
+* ( PPFCU or p-pf-scu-d ) - Copyright (C) 2018 by Mikko Heiska
 *
 *
 */

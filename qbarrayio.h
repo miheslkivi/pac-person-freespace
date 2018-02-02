@@ -1,6 +1,6 @@
 /*
 *
-*  Pac-person freespace continuum undiscreted ( PPFCU or p-pf-scu-d ) - Copyright (C) 2018 by
+*  Pac-person freespace continuum undiscreted ( PPFCU or p-pf-scu-d ) - Copyright (C) 2018 by Mikko Heiska
 *
 *
 *** You may use this file under the terms of the BSD license as follows:
