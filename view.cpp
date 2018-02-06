@@ -90,27 +90,12 @@ using namespace std;
 
 
 #define REFRESH_DELAY           33
-
-#define SHIP_SPEED              0.3
-#define MISSILE_SPEED           10.0
 #define SHIP_STEPS              360
-#define ROTATE_RATE             2
-#define SHIELD_ON_COST          1
-#define SHIELD_HIT_COST         30
-#define BRAKE_ON_COST           4
-
-#define MAX_ROCK_SPEED          2.5
-#define MAX_POWERUP_SPEED       1.5
 #define MAX_SHIP_SPEED		18  //12
-#define MAX_BRAKES              5
-#define MAX_SHIELDS             5
-#define MAX_FIREPOWER		5
 
-#define TEXT_SPEED              4
 
-#define HILL  4278195968
-#define WATER 4278190155
-#define MEADOW 4278202112
+
+
 
 #define OUT_OF_FUEL 0
 #define TRAFFIC_COLLISION 1
@@ -174,7 +159,7 @@ pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
     mwait_=vnofa_.minewait;
 
     zoomdel_=0.002;
-tped_=vnofa_.scafa;
+    tped_=vnofa_.scafa;
 
     viewtt_.resize( vnofa_.wwidth, vnofa_.wheight );
 
@@ -193,7 +178,7 @@ tped_=vnofa_.scafa;
     // viewtt_.setViewportUpdateMode(QGraphicsView::SmartViewportUpdate);
     // viewtt_.setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate );
 
-     viewtt_.setOptimizationFlags(QGraphicsView::DontClipPainter   | QGraphicsView::DontSavePainterState   | QGraphicsView::DontAdjustForAntialiasing);
+    viewtt_.setOptimizationFlags(QGraphicsView::DontClipPainter   | QGraphicsView::DontSavePainterState   | QGraphicsView::DontAdjustForAntialiasing);
     //  viewtt_.viewport()->setFocusProxy( this );
     setMouseTracking(1);
     //viewtt_.grabMouse(Qt::OpenHandCursor);
@@ -213,28 +198,28 @@ tped_=vnofa_.scafa;
     // pm2.load( jgsett_.overlaypic.c_str() );
 
     cout << " view.cpp: overlaypic= " << jgsett_.overlaypic << endl;
-if ( QFile::exists( jgsett_.overlaypic.c_str( ) )  )
-{
-    overlaypixmap_=new QPixmap ( jgsett_.overlaypic.c_str(), 0, Qt::AutoColor );
-    //    cout << " overlaypic x=" << overlaypixmap_->width() << " y=" << overlaypixmap_->height() << endl;
-    if( jgsett_.grayscale )
+    if ( QFile::exists( jgsett_.overlaypic.c_str( ) )  )
     {
-        tograyscale(  overlaypixmap_ );
+        overlaypixmap_=new QPixmap ( jgsett_.overlaypic.c_str(), 0, Qt::AutoColor );
+        //    cout << " overlaypic x=" << overlaypixmap_->width() << " y=" << overlaypixmap_->height() << endl;
+        if( jgsett_.grayscale )
+        {
+            tograyscale(  overlaypixmap_ );
+        }
+        if( arenapxm_.width()!=overlaypixmap_->width() or  arenapxm_.height()!=overlaypixmap_->height() )
+        {
+            cout << endl << endl << " pacview_widget::pacview_widget: ERROR: arena and overlay pictures different size "
+                 << endl << "  " << arenapxm_.width() << "  " <<  overlaypixmap_->width() << "  " <<
+                    arenapxm_.height() << "  " << overlaypixmap_->height()  << "  " << endl << endl;
+            exit(-1);
+        }
     }
-    if( arenapxm_.width()!=overlaypixmap_->width() or  arenapxm_.height()!=overlaypixmap_->height() )
+    else
     {
-        cout << endl << endl << " pacview_widget::pacview_widget: ERROR: arena and overlay pictures different size "
-             << endl << "  " << arenapxm_.width() << "  " <<  overlaypixmap_->width() << "  " <<
-                arenapxm_.height() << "  " << overlaypixmap_->height()  << "  " << endl << endl;
-        exit(-1);
+        cout << endl << endl << jgsett_.overlaypic << "  does not exist in right place " << endl <<
+                " using  " << jgsett_.arenapic << "  instead " << endl;
+        overlaypixmap_=new QPixmap ( jgsett_.arenapic.c_str(), 0, Qt::AutoColor );
     }
-}
-else
-{
- cout << endl << endl << jgsett_.overlaypic << "  does not exist in right place " << endl <<
-         " using  " << jgsett_.arenapic << "  instead " << endl;
-overlaypixmap_=new QPixmap ( jgsett_.arenapic.c_str(), 0, Qt::AutoColor );
-}
 
 
 
@@ -408,7 +393,7 @@ overlaypixmap_=new QPixmap ( jgsett_.arenapic.c_str(), 0, Qt::AutoColor );
     vnofa_.revacc=0; vnofa_.revacc_c=1;
 
     srand( time(NULL) );
-
+bercolmes_cou_=1;
     cout << "  QOpenGLWidget::isValid()=" << QOpenGLWidget::isValid() << "  " << flush;
     sleep( 2 );
 
@@ -713,7 +698,6 @@ void pacview_widget::newShip()
     teleportShip = FALSE;
     shootDelay = 0;
     shipPower = MAX_POWER_LEVEL;
-    rotateRate = ROTATE_RATE;
     rotateSlow = 0;
     koh_=0;
     // jgsett_.miskoh=1;
@@ -732,7 +716,7 @@ void pacview_widget::newShip()
     freelo_=0;
     jgsett_.freelo=0;
     vapk_=1;
-    jgsett_.sangle=1;
+    // jgsett_.sangle=1;
     mleft_=0;
     mright_=0;
     reconf_=1;
@@ -745,7 +729,7 @@ void pacview_widget::newShip()
 
     ship->show();
     vzoomp_=0;
-  //  tmpzoom_=vnofa_.scafa;
+    //  tmpzoom_=vnofa_.scafa;
     tmpzoom_=1;
     ship->setZValue(111);
     ship->setOpacity(1);
@@ -847,6 +831,12 @@ void pacview_widget::timerEvent( QTimerEvent * )
 
     fcount_++;
 
+    mesnum fner;
+fner.tcou=0;
+fner.tcoun=0;
+fner.distance=-3444;
+fner.mes=-123;
+fner.sernum=-12347;
 
 
     if( vnofa_.paclives )
@@ -882,10 +872,43 @@ void pacview_widget::timerEvent( QTimerEvent * )
     {
         cout << endl << "  CPU not fast enough. Too low frames per second(FPS), switching off view rotation. " << endl;
         cout << endl << "  Try smaller window or higher zoom" << endl;
-        vapkul();
+        if( jgsett_.sangle )
+        {
+            set_free_angle();
+        }
+        vnofa_.shortmsg=8;
+        vnofa_.shortmsg_c=1;
+
+        fner.mes=8;
+        fner.tcou=-110;
+        fner.distance=-12349;
+        fner.sernum=-2345;
+
+        vnofa_.shortmsgcou=0;
+
+        vnofa_.shortmsglist.append( fner );
+
 
     }
+    if( vnofa_.berries_in>=jgsett_.collectgoal and jgsett_.collectgoal>0
+            and bercolmes_cou_==1 )
+    {
 
+        cout << endl <<  endl << " collection goal reached " << jgsett_.collectgoal << endl << endl;
+        bercolmes_cou_=0;
+        vnofa_.shortmsg=7;
+        vnofa_.shortmsg_c=1;
+
+        fner.mes=7;
+        fner.tcou=-100;
+        fner.distance=-12349;
+        fner.sernum=-2345;
+
+        vnofa_.shortmsgcou=0;
+
+        vnofa_.shortmsglist.append( fner );
+
+    }
 
     muunto.reset();
     viewtt_.resetTransform();
@@ -1334,8 +1357,7 @@ jhud_->hide();
 
     if( jgsett_.hcmode!=1 )
     {
-        QList<mesnum> ttr;
-        jhelphudshort_->proch( /*ttr, nbv */);
+        jhelphudshort_->proch( );
 
 
         jhud_->setgsvar( vnofa_ );
@@ -1452,6 +1474,7 @@ jhud_->hide();
             ship->setZValue(-200 );
 
             vnofa_.shortmsg=4;
+            vnofa_.shortmsg_c=1;
             jmesntt_.distance=-543;
             jmesntt_.mes=4;
             jmesntt_.tcou=-120;
@@ -1492,6 +1515,8 @@ jhud_->hide();
             ship->setOpacity(0.5);
             ship->setZValue(-200 );
             vnofa_.shortmsg=3;
+            vnofa_.shortmsg_c=1;
+
             vnofa_.shortmsgcou=-110;
 
             jmesntt_.distance=-549;
@@ -1521,6 +1546,8 @@ jhud_->hide();
             ship->setOpacity(0.5);
             ship->setZValue(-200 );
             vnofa_.shortmsg=5;
+            vnofa_.shortmsg_c=1;
+
             vnofa_.shortmsgcou=-110;
 
             jmesntt_.distance=-249;
@@ -1539,7 +1566,6 @@ jhud_->hide();
         vnofa_.sightb=0;
 
     }
-    mesnum fner;
 
     if( ngcou_<2 )
     {
@@ -1548,6 +1574,7 @@ jhud_->hide();
         fner.distance=-12349;
         fner.sernum=-2345;
         vnofa_.shortmsg=6;
+        vnofa_.shortmsg_c=1;
         vnofa_.shortmsgcou=-110;
 
         vnofa_.shortmsglist.append( fner );
@@ -1791,7 +1818,7 @@ jhud_->hide();
     {
 
         jamline->takeangle( atan2(  shipDy + sin( goanglerad_ )*double( jgsett_.missile_speed ),
-                                  shipDx + cos( goanglerad_ )*double( jgsett_.missile_speed ) ) );
+                                    shipDx + cos( goanglerad_ )*double( jgsett_.missile_speed ) ) );
 
         jamline->setX( xpacloc_-150 );
         jamline->setY( ypacloc_-150 );
@@ -1799,7 +1826,7 @@ jhud_->hide();
         jvmeter->setY( ypacloc_-300 );
 
         jvmeter->takespeed( shipDx, shipDy, double( jgsett_.missile_speed
-                                                 ), jgsett_.ympy  );
+                                                    ), jgsett_.ympy  );
 
 
         if(  /*vnofa_.shortmsg  and vnofa_.shortmsgcou < 2 jgsett_.shortmsgcoulim */  jgsett_.shortmeson  )
@@ -1862,14 +1889,14 @@ jhud_->hide();
         {
             if( distancepac( marlis_.at( iters )->x()+jgsett_.berhawidth, marlis_.at( iters )->y()+jgsett_.berhawidth, xpacloc_, ypacloc_    )< jgsett_.grabdistance )
             {
-                vnofa_.ber++;
+                vnofa_.berries_in++;
                 delete marlis_.at( iters );
                 marlis_.removeAt( iters );
             }
         }
 
     }
-    vnofa_.unber=marlis_.size();
+    vnofa_.berries_meadow=marlis_.size();
     if( jgsett_.enercollect )
     {
         for(iters=0 ; iters< enelis_.size() ; iters++ )
@@ -2142,7 +2169,7 @@ void pacview_widget::processMissiles()
             delete (*itMissile);
             itMissile = missiles.erase(itMissile);
             explcount_++;
-                     cout << " rms " << explcount_ << flush;
+            cout << " rms " << explcount_ << flush;
 
             continue;
         }
@@ -2589,14 +2616,14 @@ void pacview_widget::paczv()
     vnofa_.speed_c=0;
     vnofa_.minelay_c=0;
 
-jgsett_.berryvisible_c=0;
-vnofa_.minevis_c=0;
-jgsett_.enervisible_c=0;
-jgsett_.boxvisible_c=0;
+    jgsett_.berryvisible_c=0;
+    vnofa_.minevis_c=0;
+    jgsett_.enervisible_c=0;
+    jgsett_.boxvisible_c=0;
 
-jgsett_.berrycollect_c=0;
-     jgsett_.enercollect_c=0;
-        jgsett_.boxcollect_c=0;
+    jgsett_.berrycollect_c=0;
+    jgsett_.enercollect_c=0;
+    jgsett_.boxcollect_c=0;
 
 
 }

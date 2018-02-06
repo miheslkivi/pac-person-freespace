@@ -123,40 +123,40 @@ void hudtt::paint( QPainter *painter, const QStyleOptionGraphicsItem * /*option*
     string vel, fuel, mines, closest, miss;
     stringstream vels, fuels;
 
-    QFont font(jgsett_.hudfontname, jgsett_.hudfontsize, jgsett_.hudfontweight );
-    QFont bon( jgsett_.hudfontname, jgsett_.hudboldfontsize, jgsett_.hudboldfontweight );
+    QFont regularhudfont(jgsett_.hudfontname, jgsett_.hudfontsize, jgsett_.hudfontweight );
+    QFont boldhudfont( jgsett_.hudfontname, jgsett_.hudboldfontsize, jgsett_.hudboldfontweight );
 
 
-    painter->setFont( font );
+    painter->setFont( regularhudfont );
 
     painter->drawText( jgsett_.fuelcoord, hudmqs("fuel",jgv_.fuel ) );
     painter->drawText(jgsett_.velcoord, hudmqs("vel", jgv_.velocity  ) );
     painter->drawText( jgsett_.minescoord, hudmqs("mines", jgv_.mines ) );
     painter->drawText( jgsett_.misscoord, hudmqs("missiles", jgv_.missiles ) );
     painter->drawText(jgsett_.closestcoord, hudmqs("closest", jgv_.ghpacetclo ) );
-    painter->drawText( jgsett_.berriescoord, hudmqs( "berries", jgv_.ber ) );
+    painter->drawText( jgsett_.berriescoord, hudmqs( "berries", jgv_.berries_in ) );
     painter->drawText( jgsett_.ghostscoord, hudmqs( "ghosts", jgv_.ghostcount  ) );
     painter->drawText( jgsett_.zoomcoord, hudmqs( "zoom", jgv_.zoom  ) );
 
     painter->drawText( jgsett_.fpscoord, hudmqs( "fps", jgv_.fps  ) );
 
-    painter->setFont( font );
+    painter->setFont( regularhudfont );
     painter->drawText( jgsett_.teccoord , hudmqs( "cou", jgv_.tec  ) );
     painter->drawText( jgsett_.setcoucoord , hudmqs( "setcou", jgv_.setcou  ) );
 
     painter->drawText( jgsett_.vixcoord , hudmqs( "x", jgv_.vix  ) );
     painter->drawText( jgsett_.viycoord , hudmqs( "y", jgv_.viy  ) );
 
-    hudbool("mouseste", jgsett_.mst, painter, jgsett_.hudfontname, jgsett_.mousestcoord   );
+    hudbool("mouseste", jgsett_.mst, painter, regularhudfont, boldhudfont, jgsett_.mousestcoord   );
 
-    hudbool("mousemissile", jgsett_.miskoh, painter, jgsett_.hudfontname, jgsett_.mousemicoord  );
+    hudbool("mousemissile", jgsett_.miskoh, painter, regularhudfont, boldhudfont, jgsett_.mousemicoord  );
 
-    hudbool("minew", jgv_.minewait, painter, jgsett_.hudfontname, jgsett_.minewaitcoord  );
-    hudbool("ghostsatt", jgv_.ghattack, painter, jgsett_.hudfontname, jgsett_.ghattackcoord );
-    hudbool( "autobrake", boolt( jgv_.brake ), painter, jgsett_.hudfontname, jgsett_.brakecoord   );
-    hudbool( "slimiter", jgsett_.splon, painter, jgsett_.hudfontname, jgsett_.sploncoord   );
-    hudbool( "safety", jgsett_.safetyon, painter, jgsett_.hudfontname, jgsett_.safetyoncoord   );
-    hudbool( "minecollect", jgv_.minecollect, painter, jgsett_.hudfontname, jgsett_.minecollectcoord   );
+    hudbool("minew", jgv_.minewait, painter, regularhudfont, boldhudfont, jgsett_.minewaitcoord  );
+    hudbool("ghostsatt", jgv_.ghattack, painter, regularhudfont, boldhudfont, jgsett_.ghattackcoord );
+    hudbool( "autobrake", boolt( jgv_.brake ), painter, regularhudfont, boldhudfont, jgsett_.brakecoord   );
+    hudbool( "slimiter", jgsett_.splon, painter, regularhudfont, boldhudfont, jgsett_.sploncoord   );
+    hudbool( "safety", jgsett_.safetyon, painter, regularhudfont, boldhudfont, jgsett_.safetyoncoord   );
+    hudbool( "minecollect", jgv_.minecollect, painter, regularhudfont, boldhudfont, jgsett_.minecollectcoord   );
 
 }
 
@@ -248,17 +248,7 @@ void helphud::paint( QPainter *painter, const QStyleOptionGraphicsItem * /*optio
 
     }
 
-
-
-
-
 }
-
-
-
-
-
-
 
 
 helphudsh::helphudsh(QList<QPixmap> &qlipxmap, gsvar &jgsvar, gsett jgset, QGraphicsScene *scene )
@@ -329,13 +319,8 @@ void helphudsh::proch(  )
 
     for( iteh=0 ; iteh<meslistvec_.size() ; iteh++ )
     {
-
-
         meslistvec_.at( iteh ).tcou++;
-
     }
-
-
 }
 
 

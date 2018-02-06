@@ -93,7 +93,7 @@ float fuelb, clinepacshipangle;
 
 float velocity, norvelocity, pevelocity;
 
-int ber, unber;
+int berries_in, berries_meadow;
 double viewangle;
 int paclives;
 float pac1x1, pac1y1;
@@ -260,7 +260,7 @@ bool ghostdetectiondistance_on, ghostclosestmeasurementdistance_on, pacdetection
 
 QString server_in, server_out;
 bool quitb, quitb_c;
-int boomagelimit;
+int boomagelimit, collectgoal;
 bool grayscale;
 
  };

@@ -400,7 +400,7 @@ void KAstTopLevel::keyPressEvent( QKeyEvent *event )
 
 
     case vapk:
-        jpacview_->vapkul();
+        jpacview_->set_free_angle();
         break;
 
     case mousesteswitch:

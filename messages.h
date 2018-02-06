@@ -57,7 +57,7 @@ QString hudmqsbool( const char *parn, int arv  );
 
 
 
-void hudbool( QString mes, char offoron, QPainter *mespainter, QString bfontname, QPoint pla  );
+void hudbool( QString mes, char offoron, QPainter *mespainter, QFont &off_font, QFont &on_font_bold,  QPoint pla  );
 int boolt( int baa );
 
 

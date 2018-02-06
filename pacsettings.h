@@ -80,7 +80,7 @@ void pacset( gsvar &tgsvar, gsett &jgsett, helpmes  &thelpmes )
 
     tgsvar.missilesb=settin_.value("missiles").toInt();
     tgsvar.fuelb=settin_.value("fuel").toFloat();
-    tgsvar.ber=0;
+    tgsvar.berries_in=0;
     tgsvar.ghcloseprecision=settin_.value("ghcloseprecision").toDouble();
     if( tgsvar.ghostx<0 )
     {
@@ -532,6 +532,9 @@ void pacset( gsvar &tgsvar, gsett &jgsett, helpmes  &thelpmes )
     jgsett.moveangle=settin_.value( "moveangle").toFloat();
     jgsett.depthangle=settin_.value( "depthangle").toFloat();
     jgsett.defaultangle=settin_.value( "defaultangle").toFloat();
+    jgsett.collectgoal=settin_.value( "collectgoal" ).toInt();
+    jgsett.sangle=settin_.value( "sangle" ).toInt();
+
 
     //    cout << endl << " exp --------" << jgsett.expvcb << "  " <<jgsett.expvca << "  " << jgsett.expvcg << "  "
     //       << jgsett.expsize << "  " << jgsett.expvel1 << "  " << jgsett.expvel2 << endl;
@@ -611,10 +614,10 @@ if( tgsvar.drivemode )
     thelpmes.htexli.push_back( vals );
 
     htexf.open( "shortmes.txt", ios::binary  );
-    for( ite=0 ; ite< 6 ; ite++ )
+    for( ite=0 ; ite< 8 ; ite++ )
     {
-        char shmsg[1000];
-        htexf.getline( shmsg, 1000 );
+        char shmsg[400];
+        htexf.getline( shmsg, 300 );
 
         thelpmes.htexli.append( shmsg );
 

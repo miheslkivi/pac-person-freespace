@@ -205,7 +205,7 @@ jset.setqplatt( jset.closeboth_pla_, bb.quitb, bb.quitb_c );
 
 
     res.append( anluq( aa.ghostcount ) );
-    res.append( anluq( aa.ber) );
+    res.append( anluq( aa.berries_in) );
     res.append( anluq(  aa.tec ) );
     res.append( anluq( aa.setcou) );
 
@@ -222,29 +222,12 @@ jset.setqplatt( jset.closeboth_pla_, bb.quitb, bb.quitb_c );
     res.append( anluq( aa.spotted_lios  ) );
     res.append( anluq( aa.spottedby  ) );
 res.append( anluqf( aa.ghpacetclo ) );
-res.append( anluq( aa.unber ) );
+res.append( anluq( aa.berries_meadow ) );
 res.append( anluq( aa.minesout )  );
 res.append( anluqf( aa.fps )  );
 
 
 
-    /*                   norghostcount_pla_,
-            spinghostcount_pla_,
-            ghostcount_pla_,
-            ber_pla_,
-            tec_pla_,
-            setcou_pla_,
-
-     traffic_collision_velocity_pla_,
-            speed_limiterf_pla_,
-            pac1x1_pla_,
-            pac1y1_pla_,
-            velocitya_pla_,
-        velocityb_pla_
-   */
-    //  cout << endl << " qbarrayio: qbagsvgsett b:  " << res.size() << endl;
-
-    //aa.ghattack_c=0;
     aa.centervie_c=0;
     aa.minecollect_c=0;
 

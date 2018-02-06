@@ -150,7 +150,7 @@ public:
 
 
 
-    void vapkul( ) { flipb( jgsett_.sangle ); jgsett_.sangle_c=1; }
+    void set_free_angle( ) { flipb( jgsett_.sangle ); jgsett_.sangle_c=1; }
     void mouseste( ) { flipb( jgsett_.mst ) ; jgsett_.mst_c=1; }
     void ghattack( ) {  flipchar( vnofa_.ghattack ) ; vnofa_.ghattack_c=1; }
 
@@ -272,7 +272,7 @@ public:
     float speed() const { return speed_dir; }
 
     int missilecount() const { return vnofa_.missiles; }
-    int bercount() const { return vnofa_.ber; }
+    int bercount() const { return vnofa_.berries_in; }
     int fminecount() const { return minelis_.size(); }
     int minecount() const { return vnofa_.mines; }
     gsvar outgsvar() {      return vnofa_; }
@@ -428,7 +428,6 @@ private:
 
     double  shipAngleAst;
     int  rotateSlow;
-    float  rotateRate;
     int  shipPower;
 
     int shotsFired;
@@ -536,11 +535,10 @@ private:
     mesnum jmesntt_;
 
     float tavx2_, tavy2_, tavkulmrad3_;
-    int intr_, kohin_;
+    int intr_, kohin_, bercolmes_cou_;
 
     QList<QPixmap> piclis_;
 QGraphicsRectItem * scenerectindicator_;
-
 
 
 };

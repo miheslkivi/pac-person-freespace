@@ -72,7 +72,7 @@ jgsi.berhawidth= marjpng.width()/2;
    enetau_.push_back( enerpng );
 
    int rantv;
-   ite=jgv.ber;
+   ite=jgv.berries_in;
 
    for( ite=0 ; ite<jgsi.iniloop  ; ite++ )
 

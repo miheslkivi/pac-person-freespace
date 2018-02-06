@@ -103,20 +103,20 @@ sparn+=tth;
 }
 
 
-void hudbool( QString mes, char offoron, QPainter *mespainter, QString bfontname, QPoint pla  )
+void hudbool( QString mes, char offoron, QPainter *mespainter, QFont &off_font, QFont &on_font_bold, QPoint pla  )
 {
-    QFont offont(bfontname, 17, 25 );
-    QFont bon(bfontname , 20,  81 );
+  //  QFont off_font(bfontname, 17, 25 );
+  //  QFont on_font_bold(bfontname , 20,  81 );
     if( offoron>=1 )
     {
-        mespainter->setFont( bon );
+        mespainter->setFont( on_font_bold );
      //   mespainter->drawText( pla, hudmqsbool( mes.toAscii(), offoron  ) );
            mespainter->drawText( pla, hudmqsbool( mes.toLatin1(), offoron  ) );
 
     }
     else
     {
-        mespainter->setFont( offont );
+        mespainter->setFont( off_font );
      //   mespainter->drawText( pla, hudmqsbool( mes.toAscii(), offoron  ) );
         mespainter->drawText( pla, hudmqsbool( mes.toLatin1(), offoron  ) );
 

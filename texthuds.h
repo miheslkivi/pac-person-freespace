@@ -73,13 +73,13 @@ public:
     inline qreal yVelocity() const                  { return vy; }
 
     QRectF boundingRect() const;
-   // QPainterPath shape() const;
+    // QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void advance(int phase);
     qreal vx, vy;
-void setgsvar( gsvar jg ) { jgv_=jg;   }
-void setgsett( gsett jg ) { jgsett_=jg;   }
+    void setgsvar( gsvar jg ) { jgv_=jg;   }
+    void setgsett( gsett jg ) { jgsett_=jg;   }
 
 private:
     struct Frame {
@@ -87,8 +87,8 @@ private:
         QPainterPath shape;
         QRectF boundingRect;
     };
-gsvar jgv_;
-gsett jgsett_ ;
+    gsvar jgv_;
+    gsett jgsett_ ;
     int currentFrame;
     QList<Frame> frames;
     QTransform jtr;
@@ -108,15 +108,15 @@ public:
     inline qreal yVelocity() const                  { return vy; }
 
     QRectF boundingRect() const;
-   // QPainterPath shape() const;
+    // QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void advance(int phase);
     qreal vx, vy;
-void sethelpmes( helpmes hm, int num ) { jhelpm_=hm;  num_=num; }
-void setgsett( gsett jg ) { jgsett_=jg;   }
-void setgsvar( gsvar jg ) { jgv_=jg;   }
-void sethcolor( QColor hcol  )  { hcol_=hcol; }
+    void sethelpmes( helpmes hm, int num ) { jhelpm_=hm;  num_=num; }
+    void setgsett( gsett jg ) { jgsett_=jg;   }
+    void setgsvar( gsvar jg ) { jgv_=jg;   }
+    void sethcolor( QColor hcol  )  { hcol_=hcol; }
 
 private:
     struct Frame {
@@ -124,9 +124,9 @@ private:
         QPainterPath shape;
         QRectF boundingRect;
     };
-gsvar jgv_;
-gsett jgsett_ ;
-helpmes jhelpm_;
+    gsvar jgv_;
+    gsett jgsett_ ;
+    helpmes jhelpm_;
     int currentFrame, num_;
     QList<Frame> frames;
     QTransform jtr;
@@ -135,10 +135,6 @@ helpmes jhelpm_;
 
 
 
-
-
-
-//shshshshshshshshshshshshshshshshshshshshshshshshshshshshshshshshshshshshshshshshshshshsh
 
 class helphudsh : public QGraphicsItem
 {
@@ -154,96 +150,63 @@ public:
     inline qreal yVelocity() const                  { return vy; }
 
     QRectF boundingRect() const;
-   // QPainterPath shape() const;
+    // QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void advance(int phase);
     qreal vx, vy;
 
 
-void sethelpmes( helpmes hm, int num )
-{
-    msgcou_++;
-
-    jhelpm_=hm;
-    jmesn_.mes=num;
-    jmesn_.tcou=0;
-    jmesn_.sernum=msgcou_;
-
-
-/*if( mpla_< jmesnvec_.size()-1 and mset_ )
-{
-mpla_++;
- }*/
-
-/*if( jmesn_.mes>=0 and jmesn_.mes<jhelpm_.htexli.size() )
-{
-    jmesnvec_.at( mpla_ )= jmesn_;
-    if( mpla_>= jmesnvec_.size()-1  )
+    void sethelpmes( helpmes hm, int num )
     {
-    mpla_=0;
-    //mset_=0;
-     }
-    else
-    {
-        mpla_++;
+        msgcou_++;
+
+        jhelpm_=hm;
+        jmesn_.mes=num;
+        jmesn_.tcou=0;
+        jmesn_.sernum=msgcou_;
+
     }
 
-}
-*/
-/*
-if( mpla_< 0 )
-{
-mpla_=jmesnvec_.size()-1;
+    void sethelpmes2( gsvar &gsv  )
+    {
+        msgcou_++;
+        int ite, meslsize;
+        jmesl_.mli.clear();
+        for( ite=0; ite<gsv.shortmsglist.size() ; ite++)
+        {
+            mnu jmnu;
+            mesnum jmesnum=gsv.shortmsglist.at( ite );
 
-}
-*/
-
-
-}
-
-void sethelpmes2( gsvar &gsv  )
-{
-    msgcou_++;
-int ite, meslsize;
-jmesl_.mli.clear();
-for( ite=0; ite<gsv.shortmsglist.size() ; ite++)
-{
-    mnu jmnu;
-  mesnum jmesnum=gsv.shortmsglist.at( ite );
-
-  jmnu.distance=jmesnum.distance;
+            jmnu.distance=jmesnum.distance;
             jmnu.mes=jmesnum.mes;
-jmnu.tcoun=jmesnum.tcoun;
-   jmesl_.mli.append( jmnu );
-}
-jmesl_.tcou=0;
-gsv.shortmsglist.clear();
+            jmnu.tcoun=jmesnum.tcoun;
+            jmesl_.mli.append( jmnu );
+        }
+        jmesl_.tcou=0;
+        gsv.shortmsglist.clear();
 
-meslistvec_.at( mpla2_ )=jmesl_;
+        meslistvec_.at( mpla2_ )=jmesl_;
 
-meslsize=meslistvec_.size();
+        meslsize=meslistvec_.size();
 
-if( mpla2_>= meslsize-1  )
-    {
-    mpla2_=0;
+        if( mpla2_>= meslsize-1  )
+        {
+            mpla2_=0;
 
-     }
-    else
-    {
-        mpla2_++;
+        }
+        else
+        {
+            mpla2_++;
+        }
+
     }
 
+    void proch();
 
-
-
-}
-
-void proch();
-
-void setgsett( gsett jg ) { jgsett_=jg;   }
-void setgsvar( gsvar jg ) { jgv_=jg;   }
-void sethcolor( QColor hcol  )  { hcol_=hcol; }
+    void setgsett( gsett jg ) { jgsett_=jg;   }
+    void setgsvar( gsvar jg ) { jgv_=jg;   }
+    void sethcolor( QColor hcol  )  { hcol_=hcol; }
 
 private:
     struct Frame {
@@ -255,10 +218,10 @@ private:
 
 
 
-gsvar jgv_;
-gsett jgsett_ ;
-helpmes jhelpm_;
-    int currentFrame, /*num_,*/ mpla_, mpla2_;
+    gsvar jgv_;
+    gsett jgsett_ ;
+    helpmes jhelpm_;
+    int currentFrame,  mpla_, mpla2_;
     QList<Frame> frames;
     QTransform jtr;
     QColor hcol_;
@@ -266,12 +229,12 @@ helpmes jhelpm_;
     QList<mesnum> numli_;
     vector<mesnum> jmesnvec_;
 
-QList<int> tur_;
-int msgcou_;
+    QList<int> tur_;
+    int msgcou_;
 
-//bool mset_;
-meslist jmesl_;
-vector<meslist> meslistvec_;
+
+    meslist jmesl_;
+    vector<meslist> meslistvec_;
 
 };
 
