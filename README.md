@@ -23,6 +23,7 @@ Mines turn color if they hear or see ghosts. If they see a ghost, i.e. their lin
 VLC media player can be controlled from inside the game:
 
 Key_6 = play / pause media
+
 Key_7 = skip_back_media 4 seconds
 
 It uses MPRIS and dbus inter process communication. 
