@@ -137,18 +137,21 @@ private:
     int score;
     int level;
     bool showHiscores, bhud, bexh;
-int     ympy_, miskoh_, asthud_, jarru_, tzoomp_, tzoomd_;
+int     ympy_, miskoh_, asthud_, jarru_, tzoomp_, tzoomd_, playon_;
 
     enum Action { Launch, Thrust, slower, RotateLeft, RotateRight, Shoot, Teleport,
                     Brake, Shield, Pause, NewGame, quit, koh, ammu, hud, asthud,
                   exh, ympy, miskoh, RotateLeftSlow, RotateRightSlow, zoomp, zoomd,
                 freelo, vapk, mousesteswitch, ghat, ksuuntvh, asuuntvh, lsuuntvh, fullsc, mleft,
                   mright, reconf, centerview, mine, detonate, edge, collect, clearb, minewait,
-                  isohud, limiter, helptext, safetyon, shorthelphud, ppicsw };
+                  isohud, limiter, helptext, safetyon, shorthelphud, ppicsw, play_pause, skip_back_media };
 
     QMap<int, Action> actions;
     gsvar jgsvar_;
     gsett tjgsett_;
+
+    QString cline_;
+
 };
 
 #endif

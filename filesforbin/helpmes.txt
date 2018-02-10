@@ -1,10 +1,12 @@
   Key_Up, Thrust     Key_Down, slower or reverse     Key_Left, RotateLeft     Key_Right, RotateRight     Key_Insert, RotateLeftSlow 
     Key_Home, RotateRightSlow     Key_Space, Shoot     Key_Z,      Key_X, Brake     Key_S, safetyon     Key_P, Pause 
     Key_T, Launch     Key_U, NewGame     Key_Escape, quit     Key_PageDown, pointer align     Key_PageUp, Shoot     Key_H, hud 
-    Key_A, asthud     Key_E, explosions visible     Key_Y, vel meter     Key_K, missile pointer     Key_L, limiter     Key_Plus, zoomp     Key_Minus, zoomd     Key_1, arrow1     Key_2,  arrow2    Key_3,  arrow3    Key_4, isohud     Key_5, shorthelphud    
+    Key_A, asthud     Key_E, explosions visible     Key_Y, vel meter     Key_K, missile pointer     Key_L, limiter     Key_Plus, zoomp    
+    Key_Minus, zoomd     Key_1, arrow1     Key_2,  arrow2    Key_3,  arrow3    Key_4, isohud     Key_5, shorthelphud    
  Key_F11, fullscreen     Key_F10, freelook     Key_F9, rotation     Key_F8, mouse steer     Key_F7, ghost attack/escape     Key_Comma,
  moveleft     Key_Period, moveright     Key_F5, reload conf     Key_C, centerview     Key_M, mine     Key_D, detonate     Key_F12,
- edge     Key_F3, minecollect     Key_F2, clearbooms     Key_W, minewait     Key_F1, helptext     Key_9, pic change 
+ edge     Key_F3, minecollect     Key_F2, clearbooms     Key_W, minewait     Key_F1, helptext     Key_9, pic change   Key_6, play / pause media
+ Key_7, skip_back_media 4 seconds
 
 ------------
 

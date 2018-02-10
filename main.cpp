@@ -376,7 +376,16 @@ int main( int argc, char **argv )
 
 
     }
-    cout << endl << "  configfile= " << nofa.configfile << endl;
+    if( QFile::exists( nofa.configfile.c_str() )  )
+    {
+        cout << endl << "  configfile= " << nofa.configfile << endl;
+    }
+    else
+    {
+     cout << endl << nofa.configfile << "  not found in right place " << endl;
+        return -1;
+
+    }
 
     QSettings setti( nofa.configfile.c_str(), QSettings::NativeFormat);
 
@@ -415,7 +424,9 @@ int main( int argc, char **argv )
     {
         nofa.wheight=setti.value("wheight").toInt();
     }
-
+    nofa.playmedia=setti.value("playmedia" ).toString();
+            nofa.pausemedia=setti.value("pausemedia" ).toString();
+            nofa.skipbackmedia=setti.value("skipbackmedia" ).toString();
 
     KAstTopLevel topLevel( nofa );
 

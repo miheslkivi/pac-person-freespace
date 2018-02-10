@@ -51,6 +51,9 @@ void pacset( gsvar &tgsvar, gsett &jgsett, helpmes  &thelpmes )
     QSettings settin_( tgsvar.configfile.c_str(), QSettings::NativeFormat);
     QSettings keysset_("keys.ini", QSettings::NativeFormat);
 
+
+
+
     jgsett.margin=settin_.value("margin").toInt();
 
     if( tgsvar.nofa==-1  )

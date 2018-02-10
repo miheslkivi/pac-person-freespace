@@ -275,6 +275,8 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
     actions.insert( Qt::Key_4, isohud );
     actions.insert( Qt::Key_5, shorthelphud );
 
+    actions.insert( Qt::Key_6, play_pause );
+    actions.insert( Qt::Key_7, skip_back_media );
 
     actions.insert( Qt::Key_F11, fullsc );
     actions.insert( Qt::Key_F10, freelo );
@@ -297,6 +299,7 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
     actions.insert( Qt::Key_9, ppicsw );
 
 
+
     bhud=1;
     bexh=1;
     ympy_=1;
@@ -306,6 +309,9 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
     tzoomp_=0;
     tzoomd_=0;
     jgsvar_=vnofa;
+playon_=0;
+cline_="0000";
+
 
     slotNewGame();
     //  jpacview_->showText( tr( "Press N to start playing" ), Qt::green );
@@ -525,6 +531,33 @@ void KAstTopLevel::keyPressEvent( QKeyEvent *event )
         jpacview_->helptext();
 
         break;
+
+     case   play_pause:
+        cline_="qdbus ";
+        if( playon_==1  )
+        {
+            cline_+=jgsvar_.pausemedia;
+            playon_=0;
+        }
+        else
+        {
+        cline_+=jgsvar_.playmedia;
+        playon_=1;
+        }
+        system( cline_.toLatin1() );
+cout << "  mediaplayer dbus message " << flush;
+        break;
+
+case   skip_back_media:
+
+        cline_="qdbus ";
+cline_+=jgsvar_.skipbackmedia;
+system( cline_.toLatin1() );
+cout << "  mediaplayer dbus message " << flush;
+
+
+break;
+
 
 
     default:

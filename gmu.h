@@ -153,6 +153,7 @@ bool drivemode, drivemodecl;
 
 float minegap;
 double ghcloseprecision;
+QString playmedia, pausemedia, skipbackmedia;
 
  } ;
 
