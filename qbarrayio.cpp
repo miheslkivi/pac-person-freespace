@@ -82,7 +82,7 @@ QByteArray anluqf( float sisluf)
 QByteArray anluqbli( int aa, int bb, int cc, int c2, int c3 )
 {
     QByteArray tul;
-  //  charintunion sis;
+    //  charintunion sis;
     tul.push_back( aa );
     tul.push_back( bb );
     tul.push_back( cc );
@@ -184,7 +184,7 @@ QByteArray qbasend( gsvar &aa, gsett &bb  )
 
     jset.setqplatt( jset.finitefuel_pla_, bb.finite_fuel, bb.finite_fuel_c );
     jset.setqplatt( jset.explvisible_pla_, bb.explvisible, bb.explvisible_c );
-jset.setqplatt( jset.closeboth_pla_, bb.quitb, bb.quitb_c );
+    jset.setqplatt( jset.closeboth_pla_, bb.quitb, bb.quitb_c );
 
     //  jset.setqplatt(   jset.ener_pla_,
 
@@ -221,10 +221,10 @@ jset.setqplatt( jset.closeboth_pla_, bb.quitb, bb.quitb_c );
     res.append( anluq( aa.spottednum  ) );
     res.append( anluq( aa.spotted_lios  ) );
     res.append( anluq( aa.spottedby  ) );
-res.append( anluqf( aa.ghpacetclo ) );
-res.append( anluq( aa.berries_meadow ) );
-res.append( anluq( aa.minesout )  );
-res.append( anluqf( aa.fps )  );
+    res.append( anluqf( aa.ghpacetclo ) );
+    res.append( anluq( aa.berries_meadow ) );
+    res.append( anluq( aa.minesout )  );
+    res.append( anluqf( aa.fps )  );
 
 
 
@@ -272,13 +272,13 @@ char pnumt( int pla, bool &aa , QByteArray  &qba )
     {
         aa=qba.at( pla*2 );
     }
-return qba.at( ( pla*2 )+1 );
+    return qba.at( ( pla*2 )+1 );
 }
 
 void ciureceive( gsvar &gsva, gsett &gsetb, QByteArray  &qba   )
 {
- //   charintunion mru;
-  //  int ite;
+    //   charintunion mru;
+    //  int ite;
     setdg jdg;
     jdg.setdgconst();
 

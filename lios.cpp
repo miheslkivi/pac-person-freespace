@@ -64,62 +64,46 @@ bool lios( QImage &tau, int x1, int y1,  int x2, int y2, QRgb hillcoloruint )
                 for( x=x1 ; x<x2 ; x+=skip )
                     {
                         y=( double( x-x1 )*ku )+y1;
-                        if( y>=yr )
-                            {
-                                cout << "  ERROR: lios   1x " << x << " y " << y << endl;
-                            }
+//                        if( y>=yr )                            {
+  //                              cout << "  ERROR: lios   1x " << x << " y " << y << endl;                            }
                         if( tau.pixel( x, y )==hillcoloruint )
                         {
                             return 1;
-
                         }
                     }
 
                     for( x=x1 ; x<x2 ; x++ )
                         {
                             y=( double( x-x1 )*ku )+y1;
-                            if( y>=yr )
-                                {
-                                    cout << "  ERROR: lios   1x " << x << " y " << y << endl;
-                                }
+//                            if( y>=yr )                                {
+  //                                  cout << "  ERROR: lios   1x " << x << " y " << y << endl;      }
                             if( tau.pixel( x, y )==hillcoloruint )
                             {
                                 return 1;
-
                             }
                         }
-
-                }
+            }
             else
                 {
-
                 for( x=x1 ; x>x2 ; x-=skip )
                     {
                         y=( double( x-x1 )*ku )+y1;
-                        if( y>=yr )
-                            {
-                                cout << "  ERROR: lios  2x " << x << " y " << y << " y1=" << y1 << " y2= " << y2 << endl;
-                            }
+                        //if( y>=yr )                            {
+                       //         cout << "  ERROR: lios  2x " << x << " y " << y << " y1=" << y1 << " y2= " << y2 << endl;  }
                         if( tau.pixel( x, y )==hillcoloruint )
                         {
                             return 1;
-
                         }
 
                     }
-
-
                     for( x=x1 ; x>x2 ; x-- )
                         {
                             y=( double( x-x1 )*ku )+y1;
-                            if( y>=yr )
-                                {
-                                    cout << "  ERROR: lios  2x " << x << " y " << y << " y1=" << y1 << " y2= " << y2 << endl;
-                                }
+                            //if( y>=yr )                                {
+                              //      cout << "  ERROR: lios  2x " << x << " y " << y << " y1=" << y1 << " y2= " << y2 << endl;  }
                             if( tau.pixel( x, y )==hillcoloruint )
                             {
                                 return 1;
-
                             }
 
                         }
@@ -130,37 +114,27 @@ bool lios( QImage &tau, int x1, int y1,  int x2, int y2, QRgb hillcoloruint )
             ku=double( x2-x1 ) / double( y2-y1 );
             if( y2>y1 )
                 {
-
                 for( y=y1 ; y<y2 ; y+=skip )
                         {
                             x=( double( y-y1 )*ku )+x1;
 
-                            if( y>=yr )
-                                {
-                                    cout << "  ERROR: lios  3x " << x << " y " << y << endl;
-                                }
+                            //if( y>=yr )                                {
+                              //      cout << "  ERROR: lios  3x " << x << " y " << y << endl;     }
                             if( tau.pixel( x, y )==hillcoloruint )
                             {
                                 return 1;
-
                             }
-
                         }
-
                 for( y=y1 ; y<y2 ; y++ )
                         {
                             x=( double( y-y1 )*ku )+x1;
 
-                            if( y>=yr )
-                                {
-                                    cout << "  ERROR: lios  3x " << x << " y " << y << endl;
-                                }
+                            //if( y>=yr )                                {
+                              //      cout << "  ERROR: lios  3x " << x << " y " << y << endl;        }
                             if( tau.pixel( x, y )==hillcoloruint )
                             {
                                 return 1;
-
                             }
-
                         }
                 }
             else
@@ -168,37 +142,25 @@ bool lios( QImage &tau, int x1, int y1,  int x2, int y2, QRgb hillcoloruint )
                 for( y=y1 ; y>y2 ; y-=skip )
                     {
                         x=( double( y-y1 )*ku )+x1;
-                        if( y>=yr )
-                            {
-                                cout << "  ERROR: lios  4x " << x << " y " << y << endl;
-                            }
+                        //if( y>=yr )                            {
+                          //      cout << "  ERROR: lios  4x " << x << " y " << y << endl;     }
                         if( tau.pixel( x, y )==hillcoloruint )
                         {
                             return 1;
-
                         }
-
-
                     }
 
                     for( y=y1 ; y>y2 ; y-- )
                         {
                             x=( double( y-y1 )*ku )+x1;
-                            if( y>=yr )
-                                {
-                                    cout << "  ERROR: lios  4x " << x << " y " << y << endl;
-                                }
+                            //if( y>=yr )                                {
+                              //      cout << "  ERROR: lios  4x " << x << " y " << y << endl;      }
                             if( tau.pixel( x, y )==hillcoloruint )
                             {
                                 return 1;
-
                             }
-
-
                         }
                 }
         }
-
-
     return tre;
 }

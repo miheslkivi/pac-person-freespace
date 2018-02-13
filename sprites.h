@@ -178,98 +178,7 @@ private:
     gsett jgs_;
 };
 
-class KBit : public AnimatedPixmapItem
-{
-public:
-    KBit( const QList<QPixmap> &s, QGraphicsScene *c ) : AnimatedPixmapItem( s, c )
-    {  death = 27; exhlas=random()%360; }
 
-    virtual int type() const {  return ID_BIT; }
-
-    void setDeath( int d ) { death = d; }
-    void growOlder() { death--; }
-    bool expired() { return death <= 0; }
-    void advance(int phase)
-    {
-
-        if (phase == 1)
-        {
-
-            // moveBy(vx+( ( random()%8 )-4 ) , vy+ ( ( random()%8 )-4 )  );
-            // moveBy(vx, vy);
-            anglelinepac( degrad( exhlas%360 ), 3, xplu, yplu  );
-            moveBy( velx_+xplu, vely_+yplu  );
-
-            exhlas+=( ( random()%5 )+1 )*( ( ( random()%2 )*2 )-1 ) ;
-
-
-        }
-
-    }
-
-
-
-private:
-    int death;
-    int exhlas;
-    double xplu, yplu;
-};
-
-class KExhaust : public AnimatedPixmapItem
-{
-public:
-    KExhaust( const QList<QPixmap> &s, QGraphicsScene *c ) : AnimatedPixmapItem( s, c )
-    {  death = 1; exhlas=random()%360; }
-
-    virtual int type() const {  return ID_EXHAUST; }
-
-    void setDeath( int d ) { death = d; }
-    void growOlder() { death--; }
-    bool expired() { return death <= 0; }
-
-    void advance(int phase)
-    {
-
-        if (phase == 1)
-        {
-
-            // moveBy(vx+( ( random()%8 )-4 ) , vy+ ( ( random()%8 )-4 )  );
-            // moveBy(vx, vy);
-            anglelinepac( degrad( exhlas%360 ), 1, xplu, yplu  );
-            moveBy( velx_+xplu, vely_+yplu  );
-
-            exhlas+=( ( random()%5 )+1 )*( ( ( random()%2 )*2 )-1 ) ;
-
-
-        }
-
-    }
-
-
-
-private:
-    int death;
-    int exhlas;
-    double xplu, yplu;
-
-};
-/*
-class KPowerup : public AnimatedPixmapItem
-{
-public:
-    KPowerup( const QList<QPixmap> &s, QGraphicsScene *c, int t ) : AnimatedPixmapItem( s, c ),
-        myAge( 0 ), _type(t) { }
-
-    virtual int type() const { return _type; }
-
-    void growOlder() { myAge++; }
-    bool expired() const { return myAge > MAX_POWERUP_AGE; }
-
-protected:
-    int myAge;
-    int _type;
-};
-*/
 
 class marj : public AnimatedPixmapItem
 {
@@ -494,8 +403,6 @@ if( expck>255 ) expck=255;
         {
             expam_+=jgs_.expvel2;
         }
-        //exco_++;
-        //  cond_+=25;
         //prepareGeometryChange();
 
     }
@@ -636,18 +543,6 @@ private:
     gsett jgs_;
 };
 
-
-
-/*
-class KShield : public AnimatedPixmapItem
-{
-public:
-    KShield( QList<QPixmap> &s, QGraphicsScene *c )
-        : AnimatedPixmapItem( s, c ) {}
-
-    virtual int type() const { return ID_SHIELD; }
-};
-*/
 
 
 #endif

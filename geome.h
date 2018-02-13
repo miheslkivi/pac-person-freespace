@@ -49,13 +49,9 @@ void anglelinepac(double kulmrad, double pit, double &xtu, double &ytu );
 double  distancepac( double x1, double y1, double x2, double y2 );
 double qpfdistance(QPointF po1, QPointF po2 , float po1p, float po2p);
 double degrad(double degreespac);
-
 double raddeg( double rad_kulm );
-
-
 double angdiffpac(double radang1, double radang2 );
 double angdiffabs( double radang1, double radang2 );
-
 double linedistpac( double x1, double y1, double x2, double y2, double px, double py, double &xvas, double &yvas );
 double linedistc( double x1, double y1, double x2, double y2, double px, double py );
 

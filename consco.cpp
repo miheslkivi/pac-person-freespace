@@ -197,3 +197,11 @@ qpxm->convertFromImage( imags );
 
 
 }
+
+
+void pathandfile( QString path, string &file )
+{
+    string res=path.toStdString()+file;
+    file=res;
+}
+

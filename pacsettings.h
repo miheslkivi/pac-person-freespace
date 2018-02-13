@@ -49,7 +49,7 @@ void pacset( gsvar &tgsvar, gsett &jgsett, helpmes  &thelpmes )
 
 
     QSettings settin_( tgsvar.configfile.c_str(), QSettings::NativeFormat);
-    QSettings keysset_("keys.ini", QSettings::NativeFormat);
+    QSettings keysset_( tgsvar.filespath+QString( "keys.ini" ), QSettings::NativeFormat);
 
 
 
@@ -337,6 +337,8 @@ void pacset( gsvar &tgsvar, gsett &jgsett, helpmes  &thelpmes )
     jgsett.mine_nw_picn =settin_.value("mine_nw_picn").toString().toStdString();
     jgsett.mi_mine_picn=settin_.value("mi_mine_picn").toString().toStdString();
     jgsett.mi_mine_nw_picn =settin_.value("mi_mine_nw_picn").toString().toStdString();
+    jgsett.missilepic=settin_.value("missilepic").toString().toStdString();
+
     jgsett.spotmine=settin_.value("spotmine").toString().toStdString();
 
     jgsett.explvisible =settin_.value("explvisible").toBool();
@@ -597,7 +599,8 @@ if( tgsvar.drivemode )
     ifstream htexf;
     int htexflen;
     char * htexc;
-    htexf.open( "helpmes.txt", ios::binary  );
+    QString astring=tgsvar.filespath+QString("helpmes.txt");
+    htexf.open( astring.toStdString(), ios::binary  );
     htexf.seekg( 0, ios::end );
     htexflen=htexf.tellg();
     htexf.seekg( 0, ios::beg );
@@ -616,7 +619,7 @@ if( tgsvar.drivemode )
 
     thelpmes.htexli.push_back( vals );
 
-    htexf.open( "shortmes.txt", ios::binary  );
+    htexf.open( ( tgsvar.filespath+QString("shortmes.txt") ).toStdString() , ios::binary  );
     for( ite=0 ; ite< 8 ; ite++ )
     {
         char shmsg[400];

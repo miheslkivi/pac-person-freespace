@@ -160,7 +160,7 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
     setAccessibleName(" toplevel-ac-n ");
 
 
-//new QGLWidget(QGLFormat(QGL::SampleBuffers))
+    //new QGLWidget(QGLFormat(QGL::SampleBuffers))
 
     jpacview_->setMouseTracking(1);
     //    grabMouse(Qt::OpenHandCursor);
@@ -214,7 +214,7 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
     QFont smallFont( "courier", 14 );
     hbd->addSpacing( 4 );
 
-  //  QString sprites_prefix = ":/trolltech/examples/graphicsview/portedasteroids/sprites/";
+    //  QString sprites_prefix = ":/trolltech/examples/graphicsview/portedasteroids/sprites/";
     hbd->addStretch( 1 );
 
     label = new QLabel( tr( "Fuel" ), mainWin );
@@ -309,8 +309,8 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
     tzoomp_=0;
     tzoomd_=0;
     jgsvar_=vnofa;
-playon_=0;
-cline_="0000";
+    playon_=0;
+    cline_="0000";
 
 
     slotNewGame();
@@ -532,7 +532,7 @@ void KAstTopLevel::keyPressEvent( QKeyEvent *event )
 
         break;
 
-     case   play_pause:
+    case   play_pause:
         cline_="qdbus ";
         if( playon_==1  )
         {
@@ -541,22 +541,22 @@ void KAstTopLevel::keyPressEvent( QKeyEvent *event )
         }
         else
         {
-        cline_+=jgsvar_.playmedia;
-        playon_=1;
+            cline_+=jgsvar_.playmedia;
+            playon_=1;
         }
         system( cline_.toLatin1() );
-cout << "  mediaplayer dbus message " << flush;
+        cout << "  mediaplayer dbus message " << flush;
         break;
 
-case   skip_back_media:
+    case   skip_back_media:
 
         cline_="qdbus ";
-cline_+=jgsvar_.skipbackmedia;
-system( cline_.toLatin1() );
-cout << "  mediaplayer dbus message " << flush;
+        cline_+=jgsvar_.skipbackmedia;
+        system( cline_.toLatin1() );
+        cout << "  mediaplayer dbus message " << flush;
 
 
-break;
+        break;
 
 
 
@@ -593,7 +593,7 @@ void KAstTopLevel::keyReleaseEvent( QKeyEvent *event )
 
 
     case exh:
-            jpacview_->explvis( );
+        jpacview_->explvis( );
 
         break;
 
@@ -604,7 +604,7 @@ void KAstTopLevel::keyReleaseEvent( QKeyEvent *event )
 
     case miskoh:
 
-            jpacview_->miskoh( );
+        jpacview_->miskoh( );
 
         break;
     case RotateLeft:
@@ -622,7 +622,7 @@ void KAstTopLevel::keyReleaseEvent( QKeyEvent *event )
         jpacview_->rotateRightSlow( FALSE );
         break;
     case centerview:
-        {
+    {
         jpacview_->centerv(0);
     }
         break;
@@ -639,7 +639,7 @@ void KAstTopLevel::keyReleaseEvent( QKeyEvent *event )
     case reconf:
         break;
     case zoomp:
-              jpacview_->zoomp( 1 );
+        jpacview_->zoomp( 1 );
 
         break;
 
@@ -658,7 +658,7 @@ void KAstTopLevel::keyReleaseEvent( QKeyEvent *event )
         break;
 
     case Shield:
-     //   jpacview_->setShield( FALSE );
+        //   jpacview_->setShield( FALSE );
         break;
 
     case Teleport:
@@ -719,7 +719,7 @@ void KAstTopLevel::showEvent( QShowEvent *e )
     QMainWindow::showEvent( e );
     if(jpacview_->outpause()==0 )
     {
-    jpacview_->pause( FALSE );
+        jpacview_->pause( FALSE );
     }
     else
     {
@@ -776,7 +776,7 @@ void KAstTopLevel::slotNewGame()
     //  levelLCD->display( level+1 );
     //   shipsLCD->display( shipsRemain-1 );
     jpacview_->newGame();
-  //  jpacview_->setRockSpeed( levels[0].rockSpeed );
+    //  jpacview_->setRockSpeed( levels[0].rockSpeed );
     //    view->showText( tr( "Press L to launch." ), yellow );
     jpacview_->newShip();
     waitShip = FALSE;
@@ -794,7 +794,7 @@ void KAstTopLevel::slotnewship()
     }
     else
     {
-     //   event->ignore();
+        //   event->ignore();
         return;
     }
 
@@ -806,22 +806,22 @@ void KAstTopLevel::slotShipKilled( /*int reason */)
     shipsRemain--;
     //  shipsLCD->display( shipsRemain-1 );
 
-cout << endl << " shipsRemain " << shipsRemain << endl;
+    cout << endl << " shipsRemain " << shipsRemain << endl;
     jpacview_->pki(1);
 
     // if ( shipsRemain )    {
 
-        waitShip = TRUE;
+    waitShip = TRUE;
 
 
-        //     view->showText(  tr( " Press L to launch."), Qt::yellow );
+    //     view->showText(  tr( " Press L to launch."), Qt::yellow );
 
     // }    else    {
-        //view->showText( tr("Game Over! Press N "), Qt::red );
-        //   view->endGame();
-       // doStats();
-        //        highscore->addEntry( score, level, showHiscores );
-   // }
+    //view->showText( tr("Game Over! Press N "), Qt::red );
+    //   view->endGame();
+    // doStats();
+    //        highscore->addEntry( score, level, showHiscores );
+    // }
 }
 
 
@@ -839,7 +839,7 @@ void KAstTopLevel::doStats()
       .arg(r);
 */
 
-  //  jpacview_->showText( "Game Over.   Press N for a new game.", Qt::yellow, FALSE );
+    //  jpacview_->showText( "Game Over.   Press N for a new game.", Qt::yellow, FALSE );
 }
 
 void KAstTopLevel::slotUpdateVitals()

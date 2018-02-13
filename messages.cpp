@@ -52,8 +52,8 @@ const char *hudm( const char *parn, double arv  )
     string sparn, sar;
     stringstream ssparn;
     ssparn << arv;
-ssparn >> sar;
-sparn+=tth;
+    ssparn >> sar;
+    sparn+=tth;
     sparn+=" ";
     sparn+=sar;
 
@@ -62,13 +62,13 @@ sparn+=tth;
 
 QString hudmqs( const char *parn, double arv  )
 {
-QString tth=parn;
+    QString tth=parn;
     QString sparn;
-string      sar;
+    string      sar;
     stringstream ssparn;
     ssparn << arv;
-ssparn >> sar;
-sparn+=tth;
+    ssparn >> sar;
+    sparn+=tth;
     sparn+=" ";
     sparn+=sar.c_str();
 
@@ -77,9 +77,9 @@ sparn+=tth;
 
 QString hudmqsbool( const char *parn, int arv  )
 {
-QString tth=parn;
+    QString tth=parn;
     QString sparn;
-string      sar;
+    string      sar;
     stringstream ssparn;
     if( arv==0 )
     {
@@ -94,7 +94,7 @@ string      sar;
     ssparn << arv;
 
 
-sparn+=tth;
+    sparn+=tth;
     sparn+=" ";
     sparn+=sar.c_str();
 
@@ -105,19 +105,16 @@ sparn+=tth;
 
 void hudbool( QString mes, char offoron, QPainter *mespainter, QFont &off_font, QFont &on_font_bold, QPoint pla  )
 {
-  //  QFont off_font(bfontname, 17, 25 );
-  //  QFont on_font_bold(bfontname , 20,  81 );
+
     if( offoron>=1 )
     {
         mespainter->setFont( on_font_bold );
-     //   mespainter->drawText( pla, hudmqsbool( mes.toAscii(), offoron  ) );
-           mespainter->drawText( pla, hudmqsbool( mes.toLatin1(), offoron  ) );
+        mespainter->drawText( pla, hudmqsbool( mes.toLatin1(), offoron  ) );
 
     }
     else
     {
         mespainter->setFont( off_font );
-     //   mespainter->drawText( pla, hudmqsbool( mes.toAscii(), offoron  ) );
         mespainter->drawText( pla, hudmqsbool( mes.toLatin1(), offoron  ) );
 
     }
@@ -125,13 +122,13 @@ void hudbool( QString mes, char offoron, QPainter *mespainter, QFont &off_font, 
 }
 int boolt( int baa )
 {
-   if( baa!=1 )
-   {
-    return 0;
-   }
-   else
-   {
-       return 1;
+    if( baa!=1 )
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
 
-   }
+    }
 }

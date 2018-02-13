@@ -77,13 +77,16 @@ int main( int argc, char **argv )
     string hst4="--help";
     string hst5="help";
     string hst6="h";
-
+    gsvar nofa;
+    nofa.filespath="../src/filesforbin/";
     if( argc>1 )
     {
         if( hst.compare(   argv[1] )==0 or hst2.compare(   argv[1] )==0 or hst3.compare(   argv[1] )==0 or
                 hst4.compare(   argv[1] )==0 or hst5.compare(   argv[1] )==0 or hst6.compare(   argv[1] )==0  )
         {
-            if(  system("cat help-cmd.txt")==-1  )
+            string ths="cat ";
+            ths+=nofa.filespath.toStdString()+string("help-cmd.txt");
+            if(  system( ths.c_str() )==-1  )
             {
                 cout << " main.cpp: error " << endl;
 
@@ -91,10 +94,6 @@ int main( int argc, char **argv )
             exit(0);
         }
     }
-
-    gsvar nofa;
-
-
 
     nofa.nofa=-1;
     nofa.trail=-1;
@@ -160,8 +159,7 @@ int main( int argc, char **argv )
     string ghostshide2("ghosts_hide");
 
 
-  //  cout << endl << "--" << wid << " pix  ( " << nofa.wwidth << " )  --" << hei << " pix  ( " << nofa.wheight << " )  --" << miss << "   " << "--" << scafa << " 0.2 - 4  ( " << nofa.scker << " )  " << endl;
-    sleep(1);
+    //  cout << endl << "--" << wid << " pix  ( " << nofa.wwidth << " )  --" << hei << " pix  ( " << nofa.wheight << " )  --" << miss << "   " << "--" << scafa << " 0.2 - 4  ( " << nofa.scker << " )  " << endl;
 
     while (1)
     {
@@ -230,7 +228,7 @@ int main( int argc, char **argv )
             }
             else
             {
-             //   nofa.drivemode=0;
+                //   nofa.drivemode=0;
 
             }
             nofa.openglcl=0;
@@ -369,7 +367,8 @@ int main( int argc, char **argv )
     }
     if( nofa.configfile.size()==0 )
     {
-        nofa.configfile="oma.ini";
+        QString hh=nofa.filespath+"oma.ini";
+        nofa.configfile=hh.toStdString();
     }
     else
     {
@@ -382,7 +381,7 @@ int main( int argc, char **argv )
     }
     else
     {
-     cout << endl << nofa.configfile << "  not found in right place " << endl;
+        cout << endl << nofa.configfile << "  not found in right place " << endl;
         return -1;
 
     }
@@ -399,12 +398,11 @@ int main( int argc, char **argv )
         nofa.scafa=4;
     }
 
-    sleep( 1 );
 
     QApplication app(argc, argv);
     cout << endl << " main.cpp: here might be a strange error message for some unknown reason: No protocol specified     What? Why? " << endl;
 
-    if ((QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_1_5) == 0) {
+    /*    if ((QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_1_5) == 0) {
         QMessageBox::critical(0, "OpenGL features missing",
                               "OpenGL version 1.5 or higher is required to run this .\n"
                               "The program will now exit.");
@@ -412,9 +410,10 @@ int main( int argc, char **argv )
     }
 
     QSurfaceFormat fmt;
-    //  fmt.setSamples(4);
+      fmt.setSamples(4);
     QSurfaceFormat::setDefaultFormat(fmt);
-   qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
+        */
+    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
     
     if( nofa.wwidth<0 )
     {
@@ -425,8 +424,17 @@ int main( int argc, char **argv )
         nofa.wheight=setti.value("wheight").toInt();
     }
     nofa.playmedia=setti.value("playmedia" ).toString();
-            nofa.pausemedia=setti.value("pausemedia" ).toString();
-            nofa.skipbackmedia=setti.value("skipbackmedia" ).toString();
+    nofa.pausemedia=setti.value("pausemedia" ).toString();
+    nofa.skipbackmedia=setti.value("skipbackmedia" ).toString();
+    if( nofa.playmedia.size()>200 or nofa.pausemedia.size()>200 or nofa.skipbackmedia.size()>200 )
+    {
+        cout << endl << " too long VLC control string(s) in config file " << endl;
+        return -1;
+
+
+    }
+
+
 
     KAstTopLevel topLevel( nofa );
 

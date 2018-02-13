@@ -68,7 +68,6 @@
 #include <QResizeEvent>
 #include <QShowEvent>
 #include <QtDebug>
-
 #include <iostream>
 #include <string>
 #include <QString>
@@ -86,15 +85,9 @@ using namespace std;
 #include "pacsettings.h"
 #include"pacinit.h"
 
-
-
-
 #define REFRESH_DELAY           33
 #define SHIP_STEPS              360
 #define MAX_SHIP_SPEED		18  //12
-
-
-
 
 
 #define OUT_OF_FUEL 0
@@ -107,7 +100,6 @@ using namespace std;
 #define M_PI 3.141592654
 #endif
 #include"qbarrayio.h"
-double gLas2;
 
 int anint( QByteArray qra )
 {
@@ -144,7 +136,6 @@ pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
 
     vnofa_=vnofa;
     takeset();
-    sleep( 2 );
 
     vnofa_.spotted=0;
     vnofa_.spottednum=0;
@@ -187,6 +178,9 @@ pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
     viewtt_.setTransformationAnchor( QGraphicsView::AnchorViewCenter );
     tecounter_=0;
 
+    string arp=vnofa_.filespath.toStdString()+jgsett_.arenapic;
+    jgsett_.arenapic=arp;
+
     cout << " view.cpp: arenapic= " << jgsett_.arenapic << endl;
 
 
@@ -197,6 +191,9 @@ pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
     QPixmap pm2;
     // pm2.load( jgsett_.overlaypic.c_str() );
 
+
+    string overlp=vnofa_.filespath.toStdString()+jgsett_.overlaypic;
+    jgsett_.overlaypic=overlp;
     cout << " view.cpp: overlaypic= " << jgsett_.overlaypic << endl;
     if ( QFile::exists( jgsett_.overlaypic.c_str( ) )  )
     {
@@ -245,19 +242,21 @@ pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
     scenerectindicator_->setBrush( QColor( 100, 50, 50, 120) );
     scenerectindicator_->setPen( QPen( Qt::darkGray, 20 ) );
 
-    //sleep(1);
-    QPixmap marjpng( jgsett_.marjpicn.c_str()  );
-    QPixmap boxcratepng( jgsett_.boxcratepicn.c_str() );
-    QPixmap enerpng( jgsett_.enerpicn.c_str() );
+
+    pathandfile( vnofa_.filespath, jgsett_.marjpicn  );
+    pathandfile( vnofa_.filespath, jgsett_.boxcratepicn );
+    pathandfile( vnofa_.filespath, jgsett_.enerpicn );
+    pathandfile( vnofa_.filespath, jgsett_.minepicn );
+    pathandfile( vnofa_.filespath, jgsett_.mine_nw_picn  );
+    pathandfile( vnofa_.filespath, jgsett_.mi_mine_picn );
+    pathandfile( vnofa_.filespath, jgsett_.mi_mine_nw_picn  );
 
     QPixmap minepng( jgsett_.minepicn.c_str());
     QPixmap mine_nw_png( jgsett_.mine_nw_picn.c_str());
     QPixmap mi_mine_png( jgsett_.mi_mine_picn.c_str());
     QPixmap mi_mine_nw_png( jgsett_.mi_mine_nw_picn.c_str());
-    QPixmap spotmine( jgsett_.spotmine.c_str() );
-    ptau_.push_back( marjpng );
-    bctau_.push_back( boxcratepng  );
-    enetau_.push_back( enerpng );
+
+    // QPixmap spotmine( jgsett_.spotmine.c_str() );
 
     jgsett_.minehawidth=minepng.width()/2;
 
@@ -265,16 +264,17 @@ pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
     minepics_.push_back( mine_nw_png );
     minepics_.push_back( mi_mine_png );
     minepics_.push_back( mi_mine_nw_png );
-    minepics_.push_back(  spotmine );
+    //  minepics_.push_back(  spotmine );
 
 
     pacinith(  marlis_, boxclis_, enelis_, jgsett_, vnofa_, backim_, fieldtt_ );
-    random_device rdtes;
-    cout << endl << " c++11 random_device=" << rdtes.entropy() << endl;
+    //   random_device rdtes;
+    // cout << endl << " c++11 random_device=" << rdtes.entropy() << endl;
 
     fcount_=0;
 
-    QPixmap aavepng( "aave.png"  );
+    pathandfile( vnofa_.filespath, jgsett_.ghostpicn  );
+    QPixmap aavepng( jgsett_.ghostpicn.c_str() );
     jgsett_.ghostwidth=aavepng.width();
     jgsett_.ghosthawidth=jgsett_.ghostwidth/2;
     atau_.clear();
@@ -317,8 +317,6 @@ pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
     outserver->~QLocalServer();
     inserver->close();
     inserver->~QLocalServer();
-
-
 
     outserver = new QLocalServer(this);
     inserver = new QLocalServer(this);
@@ -366,7 +364,6 @@ pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
                              jgsett_.shelphudtextb,  jgsett_.shelphudtexta  );
 
 
-
     jhud_=new hudtt( enetau_, vnofa_, &fieldtt_ );
     jhelphud_=new helphud( enetau_, vnofa_, jgsett_, &fieldtt_ );
     jhelphudshort_=new helphudsh( enetau_, vnofa_, jgsett_,&fieldtt_ );
@@ -393,7 +390,7 @@ pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
     vnofa_.revacc=0; vnofa_.revacc_c=1;
 
     srand( time(NULL) );
-bercolmes_cou_=1;
+    bercolmes_cou_=1;
     cout << "  QOpenGLWidget::isValid()=" << QOpenGLWidget::isValid() << "  " << flush;
     sleep( 2 );
 
@@ -757,13 +754,17 @@ void pacview_widget::brake(  )
 
 bool pacview_widget::readSprites()
 {
+    pathandfile( vnofa_.filespath, jgsett_.pacpicn );
+    pathandfile( vnofa_.filespath, jgsett_.pacpicn1 );
+    pathandfile( vnofa_.filespath, jgsett_.pacpicn2 );
+    pathandfile( vnofa_.filespath, jgsett_.pacpicn3 );
+    pathandfile( vnofa_.filespath, jgsett_.missilepic );
 
     QPixmap pacmank( jgsett_.pacpicn.c_str()  );
-
     QPixmap pacmank1( jgsett_.pacpicn1.c_str() );
     QPixmap pacmank2( jgsett_.pacpicn2.c_str() );
     QPixmap pacmank3( jgsett_.pacpicn3.c_str() );
-    QPixmap pacmissile( "missile.png" );
+    QPixmap pacmissile( jgsett_.missilepic.c_str() );
 
     jgsett_.pacwidth=pacmank.width();
     jgsett_.pachawidth = jgsett_.pacwidth/2;
@@ -832,11 +833,11 @@ void pacview_widget::timerEvent( QTimerEvent * )
     fcount_++;
 
     mesnum fner;
-fner.tcou=0;
-fner.tcoun=0;
-fner.distance=-3444;
-fner.mes=-123;
-fner.sernum=-12347;
+    fner.tcou=0;
+    fner.tcoun=0;
+    fner.distance=-3444;
+    fner.mes=-123;
+    fner.sernum=-12347;
 
 
     if( vnofa_.paclives )
@@ -1026,7 +1027,6 @@ fner.sernum=-12347;
     vnofa_.tec=tecounter_;
 
 
-    gLas2++;
     cout.precision(2 );
     cout.flags ( ios::right | ios::fixed | ios::showbase );
 

@@ -80,6 +80,8 @@ float distance;
  {
 
      int nofa;
+     QString filespath;
+
 int vika;
 int wwidth;
 int wheight;
@@ -203,7 +205,7 @@ QString hudfontname, helphudfontname,  helphudshortfontname;
 string arenapic, overlaypic;
 
 string marjpicn, boxcratepicn, enerpicn, minepicn, mine_nw_picn, mi_mine_picn, mi_mine_nw_picn, spotmine,
-pacpicn, pacpicn1, pacpicn2, pacpicn3, ghostpicn ;
+pacpicn, pacpicn1, pacpicn2, pacpicn3, ghostpicn, missilepic ;
 
 int shortmsgcoulim;
 bool shortmeson, shortmeson_c, explvisible, explvisible_c, berrycollect, berrycollect_c,

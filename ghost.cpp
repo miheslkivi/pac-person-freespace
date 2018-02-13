@@ -68,8 +68,6 @@ ghost::ghost ( const QList<QPixmap> &pic,  QGraphicsScene *c, gsvar gva, float x
     setTransformOriginPoint( pichei_, pichei_ );
     rotco_=0;
     setPos( xpos, ypos );
-    //    lgposx_=x()+pichei_;
-    //  lgposy_=y()+pichei_;
 
     lgposx_=xpos;
     lgposy_=ypos;
@@ -108,12 +106,8 @@ ghost::ghost ( const QList<QPixmap> &pic,  QGraphicsScene *c, gsvar gva, float x
 }
 
 
-
-
-
 void ghost::advance( int phase )
 {
-
 
     if ( phase == 1 )
     {
@@ -266,7 +260,6 @@ void ghost::laske( QImage &kuva )
         jkys_.xqcol=x()+pichei_;
         jkys_.yqcol=y()+pichei_;
 
-        //  behavior_=3;
 
         if( behavior_==0 )
         {
@@ -277,7 +270,6 @@ void ghost::laske( QImage &kuva )
             advex_=velx_+xplu;
             advey_=vely_+yplu;
 
-            //            mislas+=( ( random()%5 )+1 )*( ( ( random()%2 )*2 )-1 );
 
         }
         else
@@ -314,7 +306,6 @@ void ghost::laske( QImage &kuva )
 
                 if( jvast_.paicol==jgset_.meadowc.rgb()  )
                 {
-                    //setPos( jvast_.xpa-pichei_, jvast_.ypa-pichei_ );
                     posx_=jvast_.xpa-pichei_;
                     posy_=jvast_.ypa-pichei_;
                 }
@@ -346,9 +337,7 @@ void ghost::laske( QImage &kuva )
                 advey_=vely_+yplu;
 
 
-
             }
-
 
         }
 
@@ -358,13 +347,10 @@ void ghost::laske( QImage &kuva )
             lgposx_=x()+pichei_;
             lgposy_=y()+pichei_;
 
-            //moveBy( advex_, advey_  );
         }
         else
         {
-            //        mislas=( radast( atan2( lgposy_-y(),  lgposx_-x() ) )+random()%90 )-45  ;
             mislas+= 180+( ( random()%90 )-45 ) ;
-            //setPos( lgposx_-pichei_, lgposy_-pichei_  );
             posx_=lgposx_-pichei_;
             posy_=lgposy_-pichei_;
             advex_=0;
@@ -382,11 +368,8 @@ void ghost::laske( QImage &kuva )
         if(state_==1)
         {
             setOpacity(0.7);
-            //rotate(8);
         }
-
     }
-
 
 }
 
@@ -410,10 +393,10 @@ void ghost::tooclose( float xx1, float yy1 )
 
 }
 void ghost::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*option*/,
-                               QWidget * /*widget*/)
+                  QWidget * /*widget*/)
 {
     painter->drawPixmap(0, 0, frames.at(currentFrame).pixmap );
- /*   painter->setPen( Qt::white );
+    /*   painter->setPen( Qt::white );
 painter->drawPoint( 10, 10 );
 painter->setPen( Qt::red );
 painter->drawPoint( jgset_.ghosthawidth, jgset_.ghosthawidth );
@@ -423,11 +406,9 @@ painter->drawPoint( jgset_.ghosthawidth, jgset_.ghosthawidth );
 
 }
 
-aavehq::aavehq( /*gsvar jgv*/ )
-{
-   // jcgsvar_=jgv;
+aavehq::aavehq(  )
+{    
     ghpacetclo_=99999999999;
-
 
 }
 
@@ -438,16 +419,10 @@ void aavehq::prghv(vector<ghost*> &ghv, QImage &taus, gsvar &jgsv,
                    float pacxpai, float pacypai, int pkim )
 {
     unsigned int iteru;
-            //int iters;
-                    int iter2s;
- //   int pichei2;
+    int iter2s;
     double et;
     mesnum jmesn;
 
-    if( ghv.size()>0)
-    {
-      //  pichei2=ghv.at( 0 )->opichei();
-    }
     ghpacetclo_=999999999;
     int spotcou=0, nonspotcou=0;
 
@@ -464,14 +439,14 @@ void aavehq::prghv(vector<ghost*> &ghv, QImage &taus, gsvar &jgsv,
 
     }
 
-  jgsv.norghostcount=0;
-  jgsv.spinghostcount=0;
+    jgsv.norghostcount=0;
+    jgsv.spinghostcount=0;
     for( iteru=0; iteru<ghv.size(); iteru++ )
     {
 
         if( ghv.at( iteru )->state()==2  )
         {
-          jgsv.norghostcount++;
+            jgsv.norghostcount++;
         }
         if( ghv.at( iteru )->state()==1  )
         {
@@ -480,7 +455,7 @@ void aavehq::prghv(vector<ghost*> &ghv, QImage &taus, gsvar &jgsv,
 
 
         double ghpacet=distancepac( ghv.at( iteru )->x()+jgset_.ghosthawidth, ghv.at( iteru )->y()+jgset_.ghosthawidth,
-                               pacxpai, pacypai      );
+                                    pacxpai, pacypai      );
         ghv.at( iteru )->setpacdistance( ghpacet );
 
         if( ghpacet < ghpacetclo_ and ghv.at( iteru )->state()!=0 )
@@ -491,11 +466,11 @@ void aavehq::prghv(vector<ghost*> &ghv, QImage &taus, gsvar &jgsv,
         {
             if( ghpacetclo_< jgset_.ghostclosestmeasurementdistance or jgset_.ghostclosestmeasurementdistance_on==0 )
             {
-            jgsv.ghpacetclo=prec( ghpacetclo_, jgsv.ghcloseprecision ) ;
+                jgsv.ghpacetclo=prec( ghpacetclo_, jgsv.ghcloseprecision ) ;
             }
             else
             {
-             jgsv.ghpacetclo= jgset_.ghostclosestmeasurementdistance+1.1111;
+                jgsv.ghpacetclo= jgset_.ghostclosestmeasurementdistance+1.1111;
 
             }
 
@@ -532,28 +507,22 @@ void aavehq::prghv(vector<ghost*> &ghv, QImage &taus, gsvar &jgsv,
         for( iter2s=0 ; iter2s<missiles.size() ; iter2s++ )
         {
             double etaimg=distancepac( ghv.at( iteru )->x()+jgset_.ghosthawidth, ghv.at( iteru )->y()+jgset_.ghosthawidth,
-                                  missiles.at( iter2s )->x(), missiles.at( iter2s )->y()  );
+                                       missiles.at( iter2s )->x(), missiles.at( iter2s )->y()  );
             if (  etaimg < jgset_.mistriggerrange and ghv.at( iteru )->state()!=0 )
             {
-                /*delete missiles.at(iter2);
-                missiles.removeAt(iter2);
-                ghv.at( iter )->setOpacity(0.2);
-*/
+
+
                 missiles.at( iter2s )-> setexpl(1);
 
             }
 
-            /*   if( missiles.at( iter2 )->expl()==1 and  etaimg < 90 )
-            {
-                ghv.at( iter )->setstate(0)   ;
-            }
-*/
+
         }
         uint iter2u;
         for( iter2u=0 ; iter2u<bve.size() ; iter2u++ )
         {
             double etaimg=distancepac( ghv.at( iteru )->x()+jgset_.ghosthawidth, ghv.at( iteru )->y()+jgset_.ghosthawidth,
-                                  bve.at( iter2u )->x(), bve.at( iter2u )->y()  );
+                                       bve.at( iter2u )->x(), bve.at( iter2u )->y()  );
             if( bve.at( iter2u )->age()<2 and etaimg <  jgset_.explspinrange and
                     etaimg>jgset_.explrange and ghv.at( iteru )->state()==2 )
             {
@@ -579,7 +548,6 @@ void aavehq::prghv(vector<ghost*> &ghv, QImage &taus, gsvar &jgsv,
                 jmesn.tcoun=jgsv.tec;
                 jmesn.sernum=ghv.at( iteru )->sernumber();
                 jgsv.shortmsglist.append( jmesn );
-                //jgsv.meslislis.at()
 
                 jgsv.shortmsgcou=0;
                 ghv.at( iteru )->setZValue( -50 );
@@ -630,7 +598,7 @@ void aavehq::prghv(vector<ghost*> &ghv, QImage &taus, gsvar &jgsv,
         paci_.lkxpo=-123;
         paci_.lkypo=-123;
         int liht=-1;
-    //    bool vis=1;
+        //    bool vis=1;
         if( ( ( ghpacet<jgset_.ghostdetectiondistance or jgset_.ghostdetectiondistance_on==0 )
               or ( ghpacet<jgset_.pacdetectiondistance or jgset_.pacdetectiondistance_on==0 ) )
                 and ghv.at( iteru )->state()!=0 and !pkim  )
@@ -651,7 +619,7 @@ void aavehq::prghv(vector<ghost*> &ghv, QImage &taus, gsvar &jgsv,
              ( liht>0 or ( ghpacet>jgset_.ghostdetectiondistance and jgset_.ghostdetectiondistance_on ) )   )
         {
             ghv.at( iteru )->hide();
-          //  vis=0;
+            //  vis=0;
 
         }
         else
@@ -682,7 +650,7 @@ void aavehq::prghv(vector<ghost*> &ghv, QImage &taus, gsvar &jgsv,
                 ( ghpacet<jgset_.pacdetectiondistance or jgset_.pacdetectiondistance_on==0 )  )
         {
             if( jgset_.spottedbyghostknowable==1 /*or ghpacet< jgset_.ghostdetectiondistance or
-                            ghv.at( iteru )->spotmine()==1 or ghv.at( iteru )->spotminelios()==1*/ or
+                                    ghv.at( iteru )->spotmine()==1 or ghv.at( iteru )->spotminelios()==1*/ or
                     ghv.at( iteru )->isVisible() )
             {
                 jgsv.spottedby++;
@@ -729,15 +697,13 @@ void aavehq::prghv(vector<ghost*> &ghv, QImage &taus, gsvar &jgsv,
             }
             else
             {
-                //slvec.at( iter ).nak=2;
-                //ghv.at( iteru )->sline()->nak=2;
+
                 ghv.at( iteru )->setslinenak(2);
 
             }
             if( ghv.at( iteru )->beha()!=0 )
             {
-                //slvec.at( iter ).nak=2;
-                //ghv.at( iteru )->sline()->nak=2;
+
                 ghv.at( iteru )->setslinenak(2);
 
             }
@@ -758,22 +724,20 @@ void aavehq::prghv(vector<ghost*> &ghv, QImage &taus, gsvar &jgsv,
             vsl.vii=QLine( pacxpai, pacypai, ghx, ghy );
             vsl.nak=3;
             ghv.at( iteru )->setsline( vsl );
-          //  ghv.at( iteru )->setslinenak(3);
 
         }
         else
         {
             if(  !pkim and ghv.at( iteru )->isVisible() and ghv.at( iteru )->state()!=0 and paci_.spot==0  )
             {
-           if( lios( taus , pacxpai, pacypai, ghx, ghy, jgset_.hillc.rgb()  )==0 )
-           {
-               sightline vsl;
-               vsl.vii=QLine( pacxpai, pacypai, ghx, ghy );
-               vsl.nak=4;
-               ghv.at( iteru )->setsline( vsl );
-               //ghv.at( iteru )->setslinenak(4);
+                if( lios( taus , pacxpai, pacypai, ghx, ghy, jgset_.hillc.rgb()  )==0 )
+                {
+                    sightline vsl;
+                    vsl.vii=QLine( pacxpai, pacypai, ghx, ghy );
+                    vsl.nak=4;
+                    ghv.at( iteru )->setsline( vsl );
 
-           }
+                }
 
             }
 
@@ -824,9 +788,7 @@ void aavehq::prghv(vector<ghost*> &ghv, QImage &taus, gsvar &jgsv,
         }
 
 
-
         ghv.at( iteru )->laske( taus );
-
 
 
         for( iter2u=ghv.size()-1 ; iter2u>iteru; iter2u-- )
@@ -838,7 +800,6 @@ void aavehq::prghv(vector<ghost*> &ghv, QImage &taus, gsvar &jgsv,
                 {
                     ghv.at( iteru ) ->tooclose( ghv.at( iter2u )->x(), ghv.at( iter2u )->y()  ) ;
                     ghv.at( iter2u ) ->tooclose( ghv.at( iteru )->x(), ghv.at( iteru )->y() );
-
 
                 }
                 else

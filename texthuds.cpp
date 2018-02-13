@@ -119,7 +119,7 @@ void hudtt::paint( QPainter *painter, const QStyleOptionGraphicsItem * /*option*
     QColor vari2( jgsett_.hudtextr,  jgsett_.hudtextg, jgsett_.hudtextb, jgsett_.hudtexta );
 
     painter->setPen(vari2);
-   // QTextCodec::setCodecForCStrings (QTextCodec::codecForName("UTF-8"));
+    // QTextCodec::setCodecForCStrings (QTextCodec::codecForName("UTF-8"));
     string vel, fuel, mines, closest, miss;
     stringstream vels, fuels;
 
@@ -228,7 +228,7 @@ void helphud::paint( QPainter *painter, const QStyleOptionGraphicsItem * /*optio
 
     painter->setPen( hcol_ );
 
-  //  QTextCodec::setCodecForCStrings (QTextCodec::codecForName("UTF-8"));
+    //  QTextCodec::setCodecForCStrings (QTextCodec::codecForName("UTF-8"));
     string vel;
     stringstream vels;
 
@@ -339,7 +339,7 @@ void helphudsh::paint( QPainter *painter, const QStyleOptionGraphicsItem * /*opt
     int ite, ite2;
     painter->setPen( hcol_ );
 
- //   QTextCodec::setCodecForCStrings (QTextCodec::codecForName("UTF-8"));
+    //   QTextCodec::setCodecForCStrings (QTextCodec::codecForName("UTF-8"));
     string vel;
 
 
@@ -390,10 +390,10 @@ void helphudsh::paint( QPainter *painter, const QStyleOptionGraphicsItem * /*opt
                 tex= jhelpm_.htexli.at( mesint );
                 if( meslistvec_.at( ite ).mli.at( itec ).distance>0  )
                 {
-                tex+=QString(" %1 " ).arg( meslistvec_.at( ite ).mli.at( itec ).distance  );
+                    tex+=QString(" %1 " ).arg( meslistvec_.at( ite ).mli.at( itec ).distance  );
                 }
                 painter->drawText( trec, tex  );
-                elev++; 
+                elev++;
 
                 if( itec==( meslistvec_.at( ite ).mli.size()-1 ) )
                 {
