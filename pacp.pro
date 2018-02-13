@@ -38,5 +38,5 @@ qtHaveModule(opengl): QT += opengl
 sources.files = $$SOURCES $$HEADERS $$RESOURCES $$FORMS pacman.pro  
 #sources.path = $$[QT_INSTALL_EXAMPLES]/graphicsview/portedasteroids
 
-INSTALLS += target sources
+#INSTALLS += target sources
 

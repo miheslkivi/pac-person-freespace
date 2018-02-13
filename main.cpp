@@ -78,7 +78,7 @@ int main( int argc, char **argv )
     string hst5="help";
     string hst6="h";
     gsvar nofa;
-    nofa.filespath="../src/filesforbin/";
+    nofa.filespath="../pac-person-freespace-0.9.1/filesforbin/";
     if( argc>1 )
     {
         if( hst.compare(   argv[1] )==0 or hst2.compare(   argv[1] )==0 or hst3.compare(   argv[1] )==0 or
