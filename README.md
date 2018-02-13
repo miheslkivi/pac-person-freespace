@@ -38,6 +38,12 @@ Any image editor ( like GIMP ) can be used for editing arenas and for making new
 
 Currently no configuration file where keys / buttons could be set. If compiling from source, the file "toplevel.cpp" has keys. Search for string "actions.insert" and setting up keys is as easy as any config file could be.
 
+Default data file directory is now
+
+../pac-person-freespace-0.9.1/filesforbin/
+
+It is near beginning of main.cpp, if it needs to be altered. May be easiest to rename directory if there is a problem.
+
 ---------------------------------------
 
 With further developments, probably lots can be done with performance. OpenGL use is unclear. Might be better to try Vulkan?

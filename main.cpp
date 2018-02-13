@@ -61,10 +61,8 @@
 #include<string>
 #include<unistd.h>
 #include<getopt.h>
-
 #include <QtOpenGL>
 #include <QOpenGLWidget>
-
 #include<iostream>
 #include<QSettings>
 int main( int argc, char **argv )
