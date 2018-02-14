@@ -895,7 +895,8 @@ void pacview_widget::timerEvent( QTimerEvent * )
             and bercolmes_cou_==1 )
     {
 
-        cout << endl <<  endl << " collection goal reached " << jgsett_.collectgoal << endl << endl;
+        cout << endl <<  endl << " collection goal " << jgsett_.collectgoal << " reached " << endl << endl
+             << "  in " << vnofa_.tec << " cycles " << endl;
         bercolmes_cou_=0;
         vnofa_.shortmsg=7;
         vnofa_.shortmsg_c=1;

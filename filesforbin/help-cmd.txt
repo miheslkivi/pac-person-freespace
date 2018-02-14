@@ -29,20 +29,20 @@ partial words may work:
      "ghostx" ( 1234 )
      "ghosty" ( 1234 )
 
-     "arena_picture" ( x.png )
-     "overlay_picture" ( x-overlay.png )
+     "arena_picture" ( x.png )  layout of game arena
+     "overlay_picture" ( x-overlay.png ) can do without, but makes look nicer
      "configfile" ( x.ini )
 
      "ghosts" ( 150 )
 
      "drivemode"
 
-     "colorname" ( yellow  ) ( "#ffdd00" )
-    "pacangle" ( 90 )
+     "colorname" ( yellow  ) ( "#ffdd00" ) Color of character. Need to use quotation marks around html color codes.
+    "pacangle" ( 90 ) front angle of character
     "openglon"
     "opengloff"
 
     "fullscreen"
-    "ghostshide"
+    "ghostshide"   Ghosts visible only if character or mine has clear line of sight and close enough
     "ghosts_hide"
 

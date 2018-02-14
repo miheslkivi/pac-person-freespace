@@ -400,10 +400,7 @@ void pacset( gsvar &tgsvar, gsett &jgsett, helpmes  &thelpmes )
     jgsett.poilinecol2.setAlpha( settin_.value("poilinecol2_alpha").toInt()  );
 
     jgsett.boomagelimit=settin_.value("boomagelimit").toInt();
-    if( tgsvar.openglcl )
-    {
-
-    }else
+    if( !tgsvar.openglcl )
     {
         tgsvar.opengl=settin_.value("opengl").toBool();
     }

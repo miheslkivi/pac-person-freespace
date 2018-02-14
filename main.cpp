@@ -229,7 +229,6 @@ int main( int argc, char **argv )
                 //   nofa.drivemode=0;
 
             }
-            nofa.openglcl=0;
 
             if( long_options[ option_index ].name==opengloff  )
             {
@@ -242,13 +241,11 @@ int main( int argc, char **argv )
                 nofa.openglcl=1;
 
             }
-            nofa.fullscreencl=0;
             if( long_options[ option_index ].name==fullscreen  )
             {
                 nofa.fullscreen =1;
                 nofa.fullscreencl=1;
             }
-            nofa.ghinvcl=0;
             if( long_options[ option_index ].name==ghostshide or long_options[ option_index ].name==ghostshide2  )
             {
                 nofa.ghinv=1;

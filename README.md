@@ -4,15 +4,21 @@ Pac-person freespace continuum undiscreted ( PPFCU )
 
 Driving and shooting game that gets some inspiration from Pac-man. 
 
-It is undiscreted Pacman in the sense that moving-angle, velocity and both coordinates can be decimal numbers, not just whole-numbers / integers, and not just 90 degree turns.
+It is undiscreted / de-discreted Pacman in the sense that moving-angle, velocity and both coordinates can be decimal numbers, not just whole-numbers / integers, and not just 90 degree turns.
 
 The big 10 megabyte file "pac-island-overlay.png" is not absolutely necessary, but it makes the game look nicer.
 
 Keeping view rotation on may be too CPU heavy, depending on your computer and other things. Many will prefer fixed view-angle anyway. Higher zoom and smaller window helps speed.
 
+F9 switches view rotation. F10 switches follow. Then it is good to look around the arena by pointing with mouse and pressing "c".
+
+F5 reloads configuration file, if it is altered in a text editor during game.
+
+F7 makes ghosts escape, if that button is enabled in configuration file.
+
 There are 3 types of terrain: meadow, hill and water. Pac-Person and ghosts can move only in meadow. They can see over water / sea / lake if their line of sight is not blocked by hill terrain and distance is not too much ( that length can be adjusted on configuration file ). Pac-person can also shoot missiles over water. 
 
-Press m to lay a mine. If a yellow light is on a mine, it can not explode. Mines have a safety feature that makes them stand down near Pac-person. Press w to make all mines stand down. 
+Press m to lay one mine. If a yellow light is on a mine, it can not explode. Mines have a safety feature that makes them stand down near Pac-person. Press w to make all mines stand down.
 
 Default mode has all ghosts visible all the time, but this game is better if ghosts can be seen only in line of sight. Use --ghostshide command line option for this more advanced mode.
 
@@ -24,7 +30,9 @@ Key_6 = play / pause media
 
 Key_7 = skip_back_media 4 seconds
 
-It uses MPRIS and dbus inter process communication. 
+It uses MPRIS and dbus inter process communication. Especially useful if listening to audiobooks while playing.
+
+This game has no sound of it's own.
 
 This can be 2 person game so that one drives with keyboard and other shoots with mouse, especially if used on a computer connected to a big TV in front of a sofa / couch.
 
@@ -56,8 +64,6 @@ The collected things could be a list of something that needs to be learned, for 
 Derived from Qt4 example software "ported asteroids". Small remnants of it are still there.
 
 Most was done with Qt4 and ported to Qt5 on last stages.
-
-Version 0.9 or alpha.
 
 BSD license
 
