@@ -263,7 +263,7 @@ bool ghostdetectiondistance_on, ghostclosestmeasurementdistance_on, pacdetection
 
 QString server_in, server_out;
 bool quitb, quitb_c;
-int boomagelimit, collectgoal;
+int boomagelimit, collectgoal, infostringon, powermeteron ;
 bool grayscale;
 
  };

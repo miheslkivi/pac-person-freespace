@@ -126,7 +126,7 @@ private:
     KALedMeter *powerMeter;
 
     QLabel *datalabel;
-
+QLabel *fueltextlabel_;
     bool   sound;
 
     // waiting for user to press Enter to launch a ship

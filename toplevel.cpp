@@ -85,50 +85,6 @@
 #define SB_SCORE	1
 #define SB_LEVEL	2
 #define SB_SHIPS	3
-/*
-struct SLevel
-{
-    int    nrocks;
-    double rockSpeed;
-};
-
-
-#define MAX_LEVELS	16
-
-SLevel levels[MAX_LEVELS] =
-{
-    { 1, 0.4 },
-    { 1, 0.6 },
-    { 2, 0.5 },
-    { 2, 0.7 },
-    { 2, 0.8 },
-    { 3, 0.6 },
-    { 3, 0.7 },
-    { 3, 0.8 },
-    { 4, 0.6 },
-    { 4, 0.7 },
-    { 4, 0.8 },
-    { 5, 0.7 },
-    { 5, 0.8 },
-    { 5, 0.9 },
-    { 5, 1.0 }
-};
-
-const char *soundEvents[] =
-{
-    "ShipDestroyed",
-    "RockDestroyed",
-    0
-};
-
-const char *soundDefaults[] =
-{
-    "Explosion.wav",
-    "ploop.wav",
-    0
-};
-
-*/
 
 
 KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
@@ -193,9 +149,9 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
 
     hb->addSpacing( 5 );
 
-    QLabel *label;
+   // QLabel *fueltextlabel;
 
-    datalabel = new QLabel( "nop-yy", mainWin );
+    datalabel = new QLabel( "", mainWin );
     QFont dtfont( "courier", 17 );
     datalabel->setFont( dtfont );
     datalabel->setPalette( pal );
@@ -217,11 +173,11 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
     //  QString sprites_prefix = ":/trolltech/examples/graphicsview/portedasteroids/sprites/";
     hbd->addStretch( 1 );
 
-    label = new QLabel( tr( "Fuel" ), mainWin );
-    label->setFont( smallFont );
-    label->setFixedWidth( label->sizeHint().width() + 10 );
-    label->setPalette( pal );
-    hbd->addWidget( label );
+    fueltextlabel_ = new QLabel( tr( "Fuel" ), mainWin );
+    fueltextlabel_->setFont( smallFont );
+    fueltextlabel_->setFixedWidth( fueltextlabel_->sizeHint().width() + 10 );
+    fueltextlabel_->setPalette( pal );
+    hbd->addWidget( fueltextlabel_ );
 
 
     powerMeter = new KALedMeter( mainWin );
@@ -430,7 +386,7 @@ void KAstTopLevel::keyPressEvent( QKeyEvent *event )
 
     case reconf:
         jpacview_-> reloadconf();
-        tjgsett_=jpacview_->ogsett();
+        tjgsett_=jpacview_->outgsett();
 
 
         break;
@@ -844,11 +800,20 @@ void KAstTopLevel::doStats()
 
 void KAstTopLevel::slotUpdateVitals()
 {
-
+   if( jpacview_->outgsett().powermeteron )
+   {
+    powerMeter->show();
+    fueltextlabel_->show();
     powerMeter->setValue( jpacview_->fuel() );
+   }
+   else
+   {
+    powerMeter->hide();
+    fueltextlabel_->hide();
 
+   }
     stringstream ssn;
-    string nsana;
+    string infostring;
     ssn.flags ( ios::right | ios::left | ios::fixed | ios::showpos );
     ssn.width(10);
     ssn.fill( '=');
@@ -861,8 +826,17 @@ void KAstTopLevel::slotUpdateVitals()
          << "_spi_gh=" << setw( 4 ) << jpacview_->outgsvar().spinghostcount
          << "_closest=" << setw( 4 ) << jpacview_->outgsvar().ghpacetclo ;
 
-    ssn  >> nsana;
-    datalabel->setText( nsana.c_str() );
+    ssn  >> infostring;
+    if( jpacview_->outgsett().infostringon==1 )
+    {
+     datalabel->show();
+    datalabel->setText( infostring.c_str() );
+    }
+    else
+    {
+     datalabel->hide();
+
+    }
 
 }
 

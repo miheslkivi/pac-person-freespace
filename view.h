@@ -92,15 +92,24 @@ QT_END_NAMESPACE
 class grafield: public QGraphicsScene
 {
     Q_OBJECT
+public:
+    void setgsvar( gsvar vnf, gsett jgs  )
+    {
+        vnofa_=vnf;
+        jgsett_=jgs;
+    }
 protected:
- /*  void drawForeground( QPainter *painter, QRectF &rect )
+    /*
+    void drawForeground( QPainter *painter , const QRectF &rect   )
    {
        painter->setPen( Qt::cyan );
        painter->setBrush( QColor( 111,111,111, 60) );
-    painter->drawPoint( random()%4000,  random()%4000 );
-painter->drawEllipse( 1000, 1000, 3000,2000 );
-   }
-*/
+    painter->drawPoint( vnofa_.vix,  vnofa_.viy );
+cout << rect.height() << "  " << flush;
+   }*/
+private:
+    gsvar vnofa_;
+    gsett jgsett_;
 
 };
 
@@ -206,7 +215,7 @@ public:
 
                            }
     void takeset();
-    gsett ogsett( ) { return jgsett_; }
+    gsett outgsett( ) { return jgsett_; }
     void clearb()
     {
         uint iter;
@@ -269,7 +278,7 @@ public:
     int hits() const { return shotsHit; }
     int power() const { return shipPower; }
     float fuel() const { return vnofa_.fuel; }
-    float speed() const { return speed_dir; }
+    float speed() const { return vnofa_.norvelocity; }
 
     int missilecount() const { return vnofa_.missiles; }
     int bercount() const { return vnofa_.berries_in; }

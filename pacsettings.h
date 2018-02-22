@@ -400,6 +400,8 @@ void pacset( gsvar &tgsvar, gsett &jgsett, helpmes  &thelpmes )
     jgsett.poilinecol2.setAlpha( settin_.value("poilinecol2_alpha").toInt()  );
 
     jgsett.boomagelimit=settin_.value("boomagelimit").toInt();
+    jgsett.infostringon=settin_.value("infostringon").toInt();
+    jgsett.powermeteron=settin_.value("powermeteron").toInt();
     if( !tgsvar.openglcl )
     {
         tgsvar.opengl=settin_.value("opengl").toBool();
@@ -411,6 +413,7 @@ void pacset( gsvar &tgsvar, gsett &jgsett, helpmes  &thelpmes )
     jgsett.fullsc=tgsvar.fullscreen;
 
     coubo( " openGL", tgsvar.opengl  );
+cout << " openGL=?   " << endl;
 
     // QColor::setAllowX11ColorNames ( settin_.value("allowx11colornames").toBool() );
 
@@ -590,6 +593,11 @@ if( tgsvar.drivemode )
     jgsett.asuuntvh=0;
     jgsett.lsuuntvh =0;
     jgsett.ympy=0;
+    if( tgsvar.tec<3 )
+    {
+    jgsett.infostringon=0;
+    jgsett.powermeteron=0;
+    }
 }
 
     int ite;

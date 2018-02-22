@@ -223,10 +223,10 @@ pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
     backim_=arenapxm_.toImage();
     arenapxm_.~QPixmap();
 
-    //  view.setTransformationAnchor( QGraphicsView::AnchorUnderMouse );
-
-
-
+    /*fieldtt_.setItemIndexMethod( QGraphicsScene::BspTreeIndex );
+    fieldtt_.setItemIndexMethod( QGraphicsScene::NoIndex );
+    fieldtt_.setMinimumRenderSize(2);
+    */
     fieldtt_.setBackgroundBrush( *overlaypixmap_ );
     painter.begin( overlaypixmap_ );
     painter.setPen( Qt::darkGray );
@@ -1742,6 +1742,9 @@ jhud_->hide();
 
 
     edhr_=jgsett_.mst;
+
+    fieldtt_.setgsvar( vnofa_, jgsett_ );
+
 
     if( intr_ )
     {

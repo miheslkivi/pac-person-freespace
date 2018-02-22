@@ -120,6 +120,7 @@ int main( int argc, char **argv )
     nofa.drivemodecl=0;
 
     nofa.ghinvcl=0;
+    nofa.tec=0;
 
     int c;
     int digit_optind = 0;
