@@ -4,7 +4,7 @@
  pacperson killed, reason: traffic collision
  pacperson killed, reason: ghost
  press F1 for help
- collection goal reached
+ collection goal 
  FPS too low, rotation off
 invalid line 1
 invalid line 2

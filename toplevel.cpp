@@ -114,7 +114,7 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
     jpacview_ = new pacview_widget( vnofa, mainWin );
     jpacview_->makeCurrent();
     setAccessibleName(" toplevel-ac-n ");
-
+    tjgsett_=jpacview_->outgsett();
 
     //new QGLWidget(QGLFormat(QGL::SampleBuffers))
 
@@ -149,7 +149,7 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
 
     hb->addSpacing( 5 );
 
-   // QLabel *fueltextlabel;
+    // QLabel *fueltextlabel;
 
     datalabel = new QLabel( "", mainWin );
     QFont dtfont( "courier", 17 );
@@ -170,7 +170,6 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
     QFont smallFont( "courier", 14 );
     hbd->addSpacing( 4 );
 
-    //  QString sprites_prefix = ":/trolltech/examples/graphicsview/portedasteroids/sprites/";
     hbd->addStretch( 1 );
 
     fueltextlabel_ = new QLabel( tr( "Fuel" ), mainWin );
@@ -270,7 +269,6 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
 
 
     slotNewGame();
-    //  jpacview_->showText( tr( "Press N to start playing" ), Qt::green );
 }
 
 void KAstTopLevel::oukey()
@@ -387,7 +385,7 @@ void KAstTopLevel::keyPressEvent( QKeyEvent *event )
     case reconf:
         jpacview_-> reloadconf();
         tjgsett_=jpacview_->outgsett();
-
+        jgsvar_=jpacview_->outgsvar();
 
         break;
 
@@ -610,11 +608,9 @@ void KAstTopLevel::keyReleaseEvent( QKeyEvent *event )
         break;
 
     case Brake:
-        //            view->brake( FALSE );
         break;
 
     case Shield:
-        //   jpacview_->setShield( FALSE );
         break;
 
     case Teleport:
@@ -732,7 +728,6 @@ void KAstTopLevel::slotNewGame()
     //  levelLCD->display( level+1 );
     //   shipsLCD->display( shipsRemain-1 );
     jpacview_->newGame();
-    //  jpacview_->setRockSpeed( levels[0].rockSpeed );
     //    view->showText( tr( "Press L to launch." ), yellow );
     jpacview_->newShip();
     waitShip = FALSE;
@@ -762,19 +757,20 @@ void KAstTopLevel::slotShipKilled( /*int reason */)
     shipsRemain--;
     //  shipsLCD->display( shipsRemain-1 );
 
-    cout << endl << " shipsRemain " << shipsRemain << endl;
+    cout << endl << " shipsRemain " << shipsRemain << "   finite_pacs=" << tjgsett_.finite_pacs << endl;
     jpacview_->pki(1);
 
-    // if ( shipsRemain )    {
+    if ( shipsRemain or tjgsett_.finite_pacs==0 )
+    {
+        waitShip = TRUE;
 
-    waitShip = TRUE;
+    }
+    else
+    {
+        jpacview_->endGame();
 
+    }
 
-    //     view->showText(  tr( " Press L to launch."), Qt::yellow );
-
-    // }    else    {
-    //view->showText( tr("Game Over! Press N "), Qt::red );
-    //   view->endGame();
     // doStats();
     //        highscore->addEntry( score, level, showHiscores );
     // }
@@ -800,18 +796,18 @@ void KAstTopLevel::doStats()
 
 void KAstTopLevel::slotUpdateVitals()
 {
-   if( jpacview_->outgsett().powermeteron )
-   {
-    powerMeter->show();
-    fueltextlabel_->show();
-    powerMeter->setValue( jpacview_->fuel() );
-   }
-   else
-   {
-    powerMeter->hide();
-    fueltextlabel_->hide();
+    if( jpacview_->outgsett().powermeteron )
+    {
+        powerMeter->show();
+        fueltextlabel_->show();
+        powerMeter->setValue( jpacview_->fuel() );
+    }
+    else
+    {
+        powerMeter->hide();
+        fueltextlabel_->hide();
 
-   }
+    }
     stringstream ssn;
     string infostring;
     ssn.flags ( ios::right | ios::left | ios::fixed | ios::showpos );
@@ -829,12 +825,12 @@ void KAstTopLevel::slotUpdateVitals()
     ssn  >> infostring;
     if( jpacview_->outgsett().infostringon==1 )
     {
-     datalabel->show();
-    datalabel->setText( infostring.c_str() );
+        datalabel->show();
+        datalabel->setText( infostring.c_str() );
     }
     else
     {
-     datalabel->hide();
+        datalabel->hide();
 
     }
 

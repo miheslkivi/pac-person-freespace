@@ -131,6 +131,7 @@ private:
     QList<Frame> frames;
     QTransform jtr;
     QColor hcol_;
+
 };
 
 
@@ -235,7 +236,7 @@ private:
 
     meslist jmesl_;
     vector<meslist> meslistvec_;
-
+int colgoalre_, retec_;
 };
 
 

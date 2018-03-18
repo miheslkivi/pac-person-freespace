@@ -86,7 +86,7 @@ class KAstTopLevel : public QMainWindow
 public:
     KAstTopLevel(gsvar vnofa, QWidget *parent = 0);
     virtual ~KAstTopLevel();
-void oukey();
+    void oukey();
 private:
     void playSound( const char *snd );
     void readSoundMapping();
@@ -99,7 +99,7 @@ protected:
     virtual void keyReleaseEvent( QKeyEvent *event );
 
 
-   // virtual void mouseMoveEvent( QMouseEvent *me );
+    // virtual void mouseMoveEvent( QMouseEvent *me );
     virtual void mousePressEvent( QMouseEvent *me );
     virtual void mouseReleaseEvent(  QMouseEvent *me );
 
@@ -109,12 +109,12 @@ private slots:
 
     void slotShipKilled();
 
-void slotnewship();
+    void slotnewship();
     void slotUpdateVitals();
 
 private:
     pacview_widget *jpacview_;
- /*
+    /*
     QLCDNumber *scoreLCD;
     QLCDNumber *levelLCD;
     QLCDNumber *shipsLCD;
@@ -126,7 +126,7 @@ private:
     KALedMeter *powerMeter;
 
     QLabel *datalabel;
-QLabel *fueltextlabel_;
+    QLabel *fueltextlabel_;
     bool   sound;
 
     // waiting for user to press Enter to launch a ship
@@ -137,12 +137,12 @@ QLabel *fueltextlabel_;
     int score;
     int level;
     bool showHiscores, bhud, bexh;
-int     ympy_, miskoh_, asthud_, jarru_, tzoomp_, tzoomd_, playon_;
+    int     ympy_, miskoh_, asthud_, jarru_, tzoomp_, tzoomd_, playon_;
 
     enum Action { Launch, Thrust, slower, RotateLeft, RotateRight, Shoot, Teleport,
-                    Brake, Shield, Pause, NewGame, quit, koh, ammu, hud, asthud,
+                  Brake, Shield, Pause, NewGame, quit, koh, ammu, hud, asthud,
                   exh, ympy, miskoh, RotateLeftSlow, RotateRightSlow, zoomp, zoomd,
-                freelo, vapk, mousesteswitch, ghat, ksuuntvh, asuuntvh, lsuuntvh, fullsc, mleft,
+                  freelo, vapk, mousesteswitch, ghat, ksuuntvh, asuuntvh, lsuuntvh, fullsc, mleft,
                   mright, reconf, centerview, mine, detonate, edge, collect, clearb, minewait,
                   isohud, limiter, helptext, safetyon, shorthelphud, ppicsw, play_pause, skip_back_media };
 

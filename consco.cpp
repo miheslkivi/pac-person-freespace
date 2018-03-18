@@ -66,7 +66,7 @@ void flipb( bool &var )
 bool flb( bool var )
 {
     if( var)
-         return 0;
+        return 0;
     else
         return 1;
 
@@ -151,7 +151,7 @@ double prec( double val, double pre )
 
     aa=ival*pre;
 
- return aa;
+    return aa;
 }
 
 void coubo( const char* name, bool val )
@@ -172,27 +172,27 @@ void tograyscale( QPixmap* qpxm  )
 {
     int  itey, itex;
 
-QImage ima=qpxm->toImage();
-QImage imags=ima;
+    QImage ima=qpxm->toImage();
+    QImage imags=ima;
 
 
-//imags=ima.convertToFormat( QImage::Format_Indexed8, colv /*, Qt::MonoOnly */ ) ;
+    //imags=ima.convertToFormat( QImage::Format_Indexed8, colv /*, Qt::MonoOnly */ ) ;
 
-int val;
-for( itey=0 ; itey<ima.height() ; itey++  )
-{
-    for( itex=0 ; itex<ima.width() ; itex++  )
+    int val;
+    for( itey=0 ; itey<ima.height() ; itey++  )
     {
-        val=( qRed( ima.pixel( itex, itey  ) )+ qGreen( ima.pixel( itex, itey  ) )+
-              qBlue( ima.pixel( itex, itey  ) ) )/3;
-    imags.setPixel( itex, itey, qRgb( val, val , val  ) );
+        for( itex=0 ; itex<ima.width() ; itex++  )
+        {
+            val=( qRed( ima.pixel( itex, itey  ) )+ qGreen( ima.pixel( itex, itey  ) )+
+                  qBlue( ima.pixel( itex, itey  ) ) )/3;
+            imags.setPixel( itex, itey, qRgb( val, val , val  ) );
+
+        }
 
     }
 
-}
 
-
-qpxm->convertFromImage( imags );
+    qpxm->convertFromImage( imags );
 
 
 
@@ -203,5 +203,16 @@ void pathandfile( QString path, string &file )
 {
     string res=path.toStdString()+file;
     file=res;
+}
+
+float randf( float lim )
+{
+
+    if( lim==0 )
+    {
+        cout << endl << " randf: ERROR:  0 " << endl;
+        exit(-1);
+    }
+    return ( random()%int( lim*12000 ) )/12000;
 }
 

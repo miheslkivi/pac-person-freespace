@@ -137,7 +137,7 @@ public:
 
     void thrust( bool t ) { thrustShip = t && shipPower > 0;
                             vnofa_.slowthrust=0;  vnofa_.slowthrust_c=1;
-                            vnofa_.thrust=t;  vnofa_.thrust_c=1;
+                                                vnofa_.thrust=t;  vnofa_.thrust_c=1;
 
                           }
     void shoot( bool s ) { shootShip = s; shootDelay = 0; }
@@ -295,43 +295,43 @@ public:
 
     void hud(  )
     {
-     flipb( jgsett_.hud );
-       hudcha ( jgsett_.hud );
-       jgsett_.hud_c=1;
+        flipb( jgsett_.hud );
+        hudcha ( jgsett_.hud );
+        jgsett_.hud_c=1;
 
 
     }
-void hudcha( bool hudb )
-{
-    if( !hudb )
+    void hudcha( bool hudb )
     {
-        jgsett_.asthud=0;
-        jgsett_.isohud=0;
-        jgsett_.ksuuntvh=0;
-        jgsett_.asuuntvh =0;
-        jgsett_.lsuuntvh=0;
-        jgsett_.ympy=0;
-    }
-    else
-    {
-        jgsett_.asthud=1;
-        jgsett_.isohud=1;
-        jgsett_.ksuuntvh=1;
-        jgsett_.asuuntvh =1;
-        jgsett_.lsuuntvh=1;
-        jgsett_.ympy=1;
+        if( !hudb )
+        {
+            jgsett_.asthud=0;
+            jgsett_.isohud=0;
+            jgsett_.ksuuntvh=0;
+            jgsett_.asuuntvh =0;
+            jgsett_.lsuuntvh=0;
+            jgsett_.ympy=0;
+        }
+        else
+        {
+            jgsett_.asthud=1;
+            jgsett_.isohud=1;
+            jgsett_.ksuuntvh=1;
+            jgsett_.asuuntvh =1;
+            jgsett_.lsuuntvh=1;
+            jgsett_.ympy=1;
+
+        }
+        jgsett_.asthud_c=1;
+        jgsett_.isohud_c=1;
+        jgsett_.ksuuntvh_c=1;
+        jgsett_.asuuntvh_c=1;
+        jgsett_.lsuuntvh_c=1;
+        jgsett_.ympy_c=1;
+
+
 
     }
-    jgsett_.asthud_c=1;
-    jgsett_.isohud_c=1;
-    jgsett_.ksuuntvh_c=1;
-    jgsett_.asuuntvh_c=1;
-    jgsett_.lsuuntvh_c=1;
-    jgsett_.ympy_c=1;
-
-
-
-}
 
     bool ohud() { return jgsett_.hud;  }
     void asthud(  ) { flipb( jgsett_.asthud );  jgsett_.asthud_c=1;  }
@@ -348,8 +348,8 @@ void hudcha( bool hudb )
     void jarru( int jar )
     {
         vnofa_.revacc=jar; vnofa_.revacc_c=1; vnofa_.slowthrust=0;  vnofa_.slowthrust_c=1;
-                          vnofa_.thrust=0;  vnofa_.thrust_c=1;
-                          }
+        vnofa_.thrust=0;  vnofa_.thrust_c=1;
+    }
 
     void addghosts(const QList<QPixmap>  &aatau,
                    double x, double y, int count );
@@ -394,9 +394,9 @@ protected:
 
 
 private:
-  QOpenGLTexture  *overpicgl ;
+    QOpenGLTexture  *overpicgl ;
 
-  //  QGraphicsScene fieldtt_;
+    //  QGraphicsScene fieldtt_;
     grafield fieldtt_;
 
     QGraphicsView viewtt_;
@@ -547,7 +547,7 @@ private:
     int intr_, kohin_, bercolmes_cou_;
 
     QList<QPixmap> piclis_;
-QGraphicsRectItem * scenerectindicator_;
+    QGraphicsRectItem * scenerectindicator_;
 
 
 };

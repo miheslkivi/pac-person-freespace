@@ -189,7 +189,6 @@ public:
     void setFrame( );
     void takecol( QColor vari1 ) { vari=vari1;  }
     QRectF boundingRect() const;
-  //  QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void advance(int phase);
@@ -197,10 +196,8 @@ public:
 
 private:
 
-  //  qreal vx, vy;
     QColor vari;
 QPixmap kuva;
-//double kulmr, posx, posy;
 
 double nopx, nopy, spe;
 

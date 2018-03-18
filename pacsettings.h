@@ -330,6 +330,16 @@ void pacset( gsvar &tgsvar, gsett &jgsett, helpmes  &thelpmes )
     tgsvar.minegap=settin_.value("minegap").toFloat();
     jgsett.ghostwarndist=settin_.value("ghostwarndist").toFloat();
 
+    jgsett.avgspeedmin=settin_.value("avgspeedmin").toFloat();
+    jgsett.avgrotasmin=settin_.value("avgrotasmin").toFloat();
+    jgsett.avgspeedextra=settin_.value("avgspeedextra").toFloat();
+    jgsett.avgrotasextra=settin_.value("avgrotasextra").toFloat();
+    jgsett.ghost_pursuit_extra_speed=settin_.value("ghost_pursuit_extra_speed").toFloat();
+    jgsett.ghost_odds_of_direction_change_min=settin_.value("ghost_odds_of_direction_change_min").toInt();
+    jgsett.ghost_odds_of_direction_change_extra=settin_.value("ghost_odds_of_direction_change_extra").toInt();
+    jgsett.ghost_odds_of_random_shaking_min=settin_.value("ghost_odds_of_random_shaking_min").toInt();
+    jgsett.ghost_odds_of_random_shaking_extra=settin_.value("ghost_odds_of_random_shaking_extra").toInt();
+
     jgsett.marjpicn =settin_.value("marjpicn").toString().toStdString();
     jgsett.boxcratepicn =settin_.value("boxcratepicn").toString().toStdString();
     jgsett.enerpicn =settin_.value("enerpicn").toString().toStdString();
@@ -349,10 +359,16 @@ void pacset( gsvar &tgsvar, gsett &jgsett, helpmes  &thelpmes )
     jgsett.boxvisible =settin_.value("boxvisible").toBool();
     jgsett.finite_fuel =settin_.value("finite_fuel").toBool();
 
+    jgsett.finite_missiles =settin_.value("finite_missiles").toInt();
+    jgsett.finite_mines =settin_.value("finite_mines").toInt();
+    jgsett.finite_pacs=settin_.value("finite_pacs").toInt();
+
+
     jgsett.berrycollect =settin_.value("berrycollect").toBool();
     jgsett.enercollect =settin_.value("enercollect").toBool();
     jgsett.boxcollect  =settin_.value("boxcollect").toBool();
-    jgsett.speedfuelexponent =settin_.value("speedfuelexponent").toFloat();
+    jgsett.speedfuelexponent=settin_.value("speedfuelexponent").toFloat();
+    jgsett.bounce_factor=settin_.value("bounce_factor").toFloat();
 
     jgsett.pacpicn=settin_.value("pacpicn").toString().toStdString();
 
@@ -361,8 +377,12 @@ void pacset( gsvar &tgsvar, gsett &jgsett, helpmes  &thelpmes )
     jgsett.pacpicn3=settin_.value("pacpicn3").toString().toStdString();
     jgsett.ppicint=settin_.value("ppicint").toInt();
 
-    jgsett.ghostpicn=settin_.value("ghostpicn").toString().toStdString();
+    jgsett.ghostpica=settin_.value("ghostpica").toString().toStdString();
+    jgsett.ghostpicb=settin_.value("ghostpicb").toString().toStdString();
+
     jgsett.shortmsgcoulim=settin_.value("shortmsgcoulim").toInt();
+    jgsett.win_message_count=settin_.value("win_message_count").toInt();
+
     jgsett.grabdistance=settin_.value("grabdistance").toFloat();
 
     jgsett.meadowr=settin_.value("meadowr").toInt();
@@ -402,6 +422,8 @@ void pacset( gsvar &tgsvar, gsett &jgsett, helpmes  &thelpmes )
     jgsett.boomagelimit=settin_.value("boomagelimit").toInt();
     jgsett.infostringon=settin_.value("infostringon").toInt();
     jgsett.powermeteron=settin_.value("powermeteron").toInt();
+    jgsett.refresh_delay=settin_.value("refresh_delay").toInt();
+
     if( !tgsvar.openglcl )
     {
         tgsvar.opengl=settin_.value("opengl").toBool();
@@ -413,7 +435,7 @@ void pacset( gsvar &tgsvar, gsett &jgsett, helpmes  &thelpmes )
     jgsett.fullsc=tgsvar.fullscreen;
 
     coubo( " openGL", tgsvar.opengl  );
-cout << " openGL=?   " << endl;
+    cout << " openGL=?   " << endl;
 
     // QColor::setAllowX11ColorNames ( settin_.value("allowx11colornames").toBool() );
 
@@ -563,7 +585,7 @@ cout << " openGL=?   " << endl;
     {
         if( tgsvar.clinearenapic.size()==0 )
         {
-        jgsett.overlaypic=settin_.value("overlaypic").toString().toStdString();
+            jgsett.overlaypic=settin_.value("overlaypic").toString().toStdString();
         }
 
         if( jgsett.arenapic.size()>0 and jgsett.overlaypic.size()==0 )
@@ -572,33 +594,33 @@ cout << " openGL=?   " << endl;
 
         }
     }
-if( tgsvar.drivemodecl==0 )
-{
-    tgsvar.drivemode=settin_.value("drivemode"  ).toBool();
-}
-else
-{
-
-
-}
-
-
-if( tgsvar.drivemode )
-{
-    jgsett.finite_fuel=0;
-    jgsett.iniloop=0;
-    tgsvar.ghostsb=0;
-    jgsett.safetyon=1;
-    jgsett.ksuuntvh=0;
-    jgsett.asuuntvh=0;
-    jgsett.lsuuntvh =0;
-    jgsett.ympy=0;
-    if( tgsvar.tec<3 )
+    if( tgsvar.drivemodecl==0 )
     {
-    jgsett.infostringon=0;
-    jgsett.powermeteron=0;
+        tgsvar.drivemode=settin_.value("drivemode"  ).toBool();
     }
-}
+    else
+    {
+
+
+    }
+
+
+    if( tgsvar.drivemode )
+    {
+        jgsett.finite_fuel=0;
+        jgsett.iniloop=0;
+        tgsvar.ghostsb=0;
+        jgsett.safetyon=1;
+        jgsett.ksuuntvh=0;
+        jgsett.asuuntvh=0;
+        jgsett.lsuuntvh =0;
+        jgsett.ympy=0;
+        if( tgsvar.tec<3 )
+        {
+            jgsett.infostringon=0;
+            jgsett.powermeteron=0;
+        }
+    }
 
     int ite;
     ifstream htexf;

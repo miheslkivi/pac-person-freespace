@@ -344,19 +344,6 @@ void ciureceive( gsvar &gsva, gsett &gsetb, QByteArray  &qba   )
     flipnumt(  jdg.explvisible_pla_, gsetb.explvisible, qba );
     flipnumt(  jdg.closeboth_pla_, gsetb.quitb, qba );
 
-
-    //gsva.ghattack_c=qba.at( 1 );
-    //gsva.ghattack_c
-    /*    gsva.centervie=qba.at( 2 );
-    gsva.centervie_c=qba.at( 3 );
-gsva.minecollect=qba.at( 16 );
-gsva.minecollect_c=qba.at( 17 );
-*/
-
-    //if( gsva.ghattack==0 )
-    // cout << " ciu gsva " << gsva.ghattack << endl;
-
-
     // cout << " qba size " << qba.size() << endl;
 }
 

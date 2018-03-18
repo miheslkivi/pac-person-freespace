@@ -241,15 +241,15 @@ void ghost::laske( QImage &kuva )
             behavior_=2;
 
         }
-        if( random()%3400==0 and beh3_<=0 )
+        if( random()%( odds_of_random_shaking_ +500 )==0 and beh3_<=0 )
         {
             behavior_=3;
             beh3_=5;
         }
-        if( behavior_==1 and  random()%2500==0 and beh3_<=0)
+        if( behavior_==1 and  random()%odds_of_random_shaking_==0 and beh3_<=0 )
         {
             behavior_=3;
-            beh3_=15;
+            beh3_=15+( random()%100 );
 
         }
 
@@ -266,7 +266,7 @@ void ghost::laske( QImage &kuva )
 
 
             pacbe_=atan2( pac_.lkypo-(  y()+ pichei_ )  ,  pac_.lkxpo-( x() + pichei_ )  );
-            anglelinepac( pacbe_, 3+avgspeedtt_+( float( random()%400 )/200.0 ), xplu, yplu  );
+            anglelinepac( pacbe_, jgset_.avgspeedmin+jgset_.ghost_pursuit_extra_speed+avgspeedtt_+( float( random()%400 )/200.0 ), xplu, yplu  );
             advex_=velx_+xplu;
             advey_=vely_+yplu;
 
@@ -278,15 +278,16 @@ void ghost::laske( QImage &kuva )
 
             if( behavior_==1 )
             {
-                if( random()%20==0 )
+                if( random()%odds_of_dir_change_==0 )
                 {
                     tt_=( ( ( random()%2 )*2 )-1 );
                 }
-                anglelinepac( degrad( mislas%360 ), 1.1+avgspeedtt_+( float( random()%400 )/200.0 ), xplu, yplu  );
+                anglelinepac( degrad( mislas%360 ), jgset_.avgspeedmin+avgspeedtt_+( float( random()%400 )/200.0 ), xplu, yplu  );
+
                 advex_=xplu  ;
                 advey_=yplu  ;
 
-                mislas+=( double( ( random()%20 )+20+avgrotastt_ ) / 10.9 )*tt_;
+                mislas+=( double( ( random()%20 )+ jgset_.avgrotasmin+avgrotastt_ ) / 10.9 )*tt_;
 
             }
             if( behavior_==2  )
@@ -395,7 +396,10 @@ void ghost::tooclose( float xx1, float yy1 )
 void ghost::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*option*/,
                   QWidget * /*widget*/)
 {
-    painter->drawPixmap(0, 0, frames.at(currentFrame).pixmap );
+    //  painter->drawPixmap(0, 0, frames.at(currentFrame).pixmap );
+    painter->drawPixmap(0, 0, frames.at( pic_type_ ).pixmap );
+
+
     /*   painter->setPen( Qt::white );
 painter->drawPoint( 10, 10 );
 painter->setPen( Qt::red );
@@ -650,7 +654,7 @@ void aavehq::prghv(vector<ghost*> &ghv, QImage &taus, gsvar &jgsv,
                 ( ghpacet<jgset_.pacdetectiondistance or jgset_.pacdetectiondistance_on==0 )  )
         {
             if( jgset_.spottedbyghostknowable==1 /*or ghpacet< jgset_.ghostdetectiondistance or
-                                    ghv.at( iteru )->spotmine()==1 or ghv.at( iteru )->spotminelios()==1*/ or
+                                            ghv.at( iteru )->spotmine()==1 or ghv.at( iteru )->spotminelios()==1*/ or
                     ghv.at( iteru )->isVisible() )
             {
                 jgsv.spottedby++;

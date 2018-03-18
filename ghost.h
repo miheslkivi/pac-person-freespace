@@ -54,7 +54,7 @@
 #include "sprites.h"
 #include <cstdlib>
 #include"texthuds.h"
-
+#include"consco.h"
 
 #include<cmath>
 
@@ -63,76 +63,85 @@
 
 class ghost : public AnimatedPixmapItem
 {
-  //  Q_OBJECT
+    //  Q_OBJECT
 
 public:
     ghost (const QList<QPixmap> &pic, QGraphicsScene *c, gsvar gva , float xpos, float ypos);
-//        : AnimatedPixmapItem( pic, c );
+    //        : AnimatedPixmapItem( pic, c );
 
 
 
 
-   //   void growOlder() { myAge++; }
-      void setpacinfo(  pacinfo pac ) {  pac_=pac; }
-      void setgsvar( gsvar jg, gsett jgs ) {  jcgsvar_=jg;  jgset_=jgs; }
-      void setpacspot( int spot ) { pac_.spot=spot; }
-      void setsnumber( int sn ) { serialnumber_=sn;
-                                  setZValue(10+serialnumber_);
-                                  avgspeedtt_=(random()%2000)/1000.0;
-                                  avgrotastt_=(random()%2000)/100.0;
-agett_=0;
+    //   void growOlder() { myAge++; }
+    void setpacinfo(  pacinfo pac ) {  pac_=pac; }
+    void setgsvar( gsvar jg, gsett jgs ) {  jcgsvar_=jg;  jgset_=jgs; }
+    void setpacspot( int spot ) { pac_.spot=spot; }
+    void setsnumber( int sn )
+    {
+        serialnumber_=sn;
+        setZValue(10+serialnumber_);
 
-                                }
+        agett_=0;
+        avgspeedtt_=randf( jgset_.avgspeedextra );
 
-void setstate( int st ) { state_=st; }
-void setspottedbymine( bool spo ) {  spom_=spo; }
-void setspottedbyminelios( bool spo ) {  spomlios_=spo; }
+        avgrotastt_=randf( jgset_.avgrotasextra );
+        odds_of_dir_change_= ( random()%jgset_.ghost_odds_of_direction_change_extra )+
+                jgset_.ghost_odds_of_direction_change_min;
+        odds_of_random_shaking_= ( random()%jgset_.ghost_odds_of_random_shaking_extra  )+
+                jgset_.ghost_odds_of_random_shaking_min;
 
-bool spotmine() { return spom_; }
-bool spotminelios() { return spomlios_; }
+        pic_type_=random()%2;
+    }
 
-void setpyco( int py ) { pyco_=py; }
+    void setstate( int st ) { state_=st; }
+    void setspottedbymine( bool spo ) {  spom_=spo; }
+    void setspottedbyminelios( bool spo ) {  spomlios_=spo; }
 
-void setsline( sightline jsl  )
-{
-    jsl_=jsl;
+    bool spotmine() { return spom_; }
+    bool spotminelios() { return spomlios_; }
 
-}
-void setslinenak( int nak ) { jsl_.nak=nak; }
+    void setpyco( int py ) { pyco_=py; }
 
-sightline sline() { return jsl_; }
+    void setsline( sightline jsl  )
+    {
+        jsl_=jsl;
+
+    }
+    void setslinenak( int nak ) { jsl_.nak=nak; }
+
+    sightline sline() { return jsl_; }
 
 
 
 
 
-int pyco() { return pyco_; }
+    int pyco() { return pyco_; }
 
-int state() { return state_; }
-      float rotas() { return avgrotastt_; }
-      float avspee() { return avgspeedtt_; }
+    int state() { return state_; }
+    float rotas() { return avgrotastt_; }
+    float avspee() { return avgspeedtt_; }
 
     //  void setlgpos( float xxp, float yyp  ) { lgposx_=xxp; lgposy_=yyp; }
-      void lgposthis() { lgposx_=x()+pichei_;  lgposy_=y()+pichei_;   }
-//      void golgpos() {  setPos( lgposx_-pichei_, lgposy_-pichei_  ); }
-void golgpos() {    golg_=1;  }
-      pacinfo reportpacinfo() { return pac_; }
-      void advance(int phase);
+    void lgposthis() { lgposx_=x()+pichei_;  lgposy_=y()+pichei_;   }
+    //      void golgpos() {  setPos( lgposx_-pichei_, lgposy_-pichei_  ); }
+    void golgpos() {    golg_=1;  }
+    pacinfo reportpacinfo() { return pac_; }
+    void advance(int phase);
 
-void tooclose(float xx1, float yy1 );
-int opichei( ) { return pichei_; }
-ghqquestion askghq() { return jkys_; }
-void getanswer( ghqanswer ans ) {  jvast_=ans; }
-void laske( QImage &kuva );
-int beha() { return behavior_; }
-int sernumber() { return serialnumber_; }
+    void tooclose(float xx1, float yy1 );
+    int opichei( ) { return pichei_; }
+    ghqquestion askghq() { return jkys_; }
+    void getanswer( ghqanswer ans ) {  jvast_=ans; }
+    void laske( QImage &kuva );
+    int beha() { return behavior_; }
+    int sernumber() { return serialnumber_; }
 
-void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-float opacdistance() { return pacdistance_; }
-void setpacdistance( float dis ) { pacdistance_=dis; }
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    float opacdistance() { return pacdistance_; }
+    void setpacdistance( float dis ) { pacdistance_=dis; }
 
 private:
-double advex_, advey_;
+    double advex_, advey_;
 
     int myAge;
     int mislas;
@@ -142,25 +151,25 @@ double advex_, advey_;
     int fiwid_, fihei_;
     int tt_, ncou_;
     pacinfo pac_;
-double lgposx_, lgposy_, posx_, posy_;
-int pichei_;
-int golg_;
-int rotco_;
-vector<QPoint>  vive_;
-int vikoh_, vikohli_, harhcou_, pako_;
-gsvar jcgsvar_;
-gsett jgset_;
-ghqanswer jvast_;
-ghqquestion jkys_;
-int beh3_;
-int serialnumber_, state_, pyco_;
-int agett_;
-float avgspeedtt_, avgrotastt_, sta2op_;
-vector<int> hbtt_;
-sightline jsl_;
+    double lgposx_, lgposy_, posx_, posy_;
+    int pichei_;
+    int golg_;
+    int rotco_;
+    vector<QPoint>  vive_;
+    int vikoh_, vikohli_, harhcou_, pako_;
+    gsvar jcgsvar_;
+    gsett jgset_;
+    ghqanswer jvast_;
+    ghqquestion jkys_;
+    int beh3_,  odds_of_dir_change_, odds_of_random_shaking_;
+    int serialnumber_, state_, pyco_, pic_type_;
+    int agett_;
+    float avgspeedtt_, avgrotastt_, sta2op_;
+    vector<int> hbtt_;
+    sightline jsl_;
 
-bool spom_, spomlios_;
-float pacdistance_;
+    bool spom_, spomlios_;
+    float pacdistance_;
 
 };
 //gsvar ghost::jcgsvar;
@@ -177,15 +186,15 @@ public:
     void prghv(vector<ghost*> &ghv , QImage &taus, gsvar &jgsv,
                QList<KMissile*> &missiles, vector<boom *> &bve, QList<minett *> &minelis, float pacxpai, float pacypai, int pkim);
 
-void setgsvar( gsvar jgv );
-void setgset( gsett &jgs );
+    void setgsvar( gsvar jgv );
+    void setgset( gsett &jgs );
 
 private:
     gsvar jcgsvar_;
     gsett jgset_;
-vector<ghost*> ghv_;
-pacinfo paci_;
-double ghpacetclo_;
+    vector<ghost*> ghv_;
+    pacinfo paci_;
+    double ghpacetclo_;
 };
 
 

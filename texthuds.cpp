@@ -228,7 +228,6 @@ void helphud::paint( QPainter *painter, const QStyleOptionGraphicsItem * /*optio
 
     painter->setPen( hcol_ );
 
-    //  QTextCodec::setCodecForCStrings (QTextCodec::codecForName("UTF-8"));
     string vel;
     stringstream vels;
 
@@ -283,6 +282,8 @@ helphudsh::helphudsh(QList<QPixmap> &qlipxmap, gsvar &jgsvar, gsett jgset, QGrap
         jme.tcou=0;
         meslistvec_.push_back( jme );
     }
+    colgoalre_=0;
+    retec_=0;
 
 }
 
@@ -378,8 +379,9 @@ void helphudsh::paint( QPainter *painter, const QStyleOptionGraphicsItem * /*opt
         {
 
             mesint=meslistvec_.at( ite ).mli.at( itec ).mes ;
-            if( mesint>0 and  mesint<jhelpm_.htexli.size() and
-                    meslistvec_.at( ite ).tcou < jgsett_.shortmsgcoulim  )
+            if( mesint>0 and  mesint<jhelpm_.htexli.size() and (
+                        meslistvec_.at( ite ).tcou < jgsett_.shortmsgcoulim  or
+                        ( mesint==7 and meslistvec_.at( ite ).tcou < jgsett_.win_message_count ) )  )
             {
                 QColor vcol=hcol_;
                 vcol.setAlpha( ( vcol.alpha() )/( float( ite2+2.0 )*0.5 )  );
@@ -392,6 +394,22 @@ void helphudsh::paint( QPainter *painter, const QStyleOptionGraphicsItem * /*opt
                 {
                     tex+=QString(" %1 " ).arg( meslistvec_.at( ite ).mli.at( itec ).distance  );
                 }
+                if( mesint==6 )
+                {
+                    tex+="  Get "+QString::number( jgsett_.collectgoal )+ " berries as fast as possible ";
+                }
+                if( mesint==7 )
+                {
+                    if( colgoalre_==0 )
+                    {
+                        retec_=  jgv_.tec ;
+                        colgoalre_=1;
+                    }
+                    tex+=" " +QString::number( jgsett_.collectgoal )+" reached in "+ QString::number( retec_ )+" cycles";
+
+                }
+
+
                 painter->drawText( trec, tex  );
                 elev++;
 

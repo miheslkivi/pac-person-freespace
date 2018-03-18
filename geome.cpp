@@ -56,7 +56,7 @@ double  distancepac( double x1, double y1, double x2, double y2 )
 
 double qpfdistance( QPointF po1, QPointF po2, float po1p, float po2p )
 {
- return distancepac( po1.x()+po1p, po1.y()+po1p, po2.x()+po2p, po2.y()+po2p   ) ;
+    return distancepac( po1.x()+po1p, po1.y()+po1p, po2.x()+po2p, po2.y()+po2p   ) ;
 
 }
 
@@ -88,7 +88,7 @@ double angdiffpac( double radang1, double radang2 )
     if( abs( t1 )<abs( radt ) ) radt=t1;
 
     return  radt ;
-//    return rd( t );
+    //    return rd( t );
 
 }
 
@@ -119,36 +119,36 @@ double linedistpac( double x1, double y1, double x2, double y2, double px, doubl
 
 
     if( x1!=x2 and y1!=y2 )
-        {
-            x = ( ( -1.0*ku2*double( px ) ) +double( py )+( -1.0*double( y1 ) ) + ku*double( x1 ) ) / ( ku -  ku2 );
+    {
+        x = ( ( -1.0*ku2*double( px ) ) +double( py )+( -1.0*double( y1 ) ) + ku*double( x1 ) ) / ( ku -  ku2 );
 
-            y=( double( x-x1 )*ku )+y1;
-            et=sqrt( ( ( x-px )*( x-px ) ) + ( ( y-py ) * ( y-py ) ) );
-        }
+        y=( double( x-x1 )*ku )+y1;
+        et=sqrt( ( ( x-px )*( x-px ) ) + ( ( y-py ) * ( y-py ) ) );
+    }
     else
+    {
+        if( x1==x2 )
         {
-            if( x1==x2 )
-                {
-                    et=abs( x1-px );
-                    x=x1;
-                    y=py;
-                }
-            if( y1==y2 )
-                {
-                    et=abs( y1-py );
-                    x=px;
-                    y=y1;
-                }
-            if( x1==x2 and y1==y2 )
-                {
-                    et=0;
-                    x=px;
-                    y=py;
-                }
+            et=abs( x1-px );
+            x=x1;
+            y=py;
         }
+        if( y1==y2 )
+        {
+            et=abs( y1-py );
+            x=px;
+            y=y1;
+        }
+        if( x1==x2 and y1==y2 )
+        {
+            et=0;
+            x=px;
+            y=py;
+        }
+    }
 
-xvas=x;
-yvas=y;
+    xvas=x;
+    yvas=y;
 
     return et;
 }
@@ -158,7 +158,7 @@ double linedistc( double x1, double y1, double x2, double y2, double px, double 
     vas=linedistpac( x1, y1, x2, y2, px, py, th, th2  );
     return vas;
 
-       }
+}
 
 
 
@@ -192,12 +192,12 @@ double katee( double x, double et )
 void kda( double x1, double y1,  double x2, double y2, double &xvas, double &yvas  )
 {
     double  xx, yy, cc;
-cc=distancepac( 0, 0, x2, y2  );
-   xx=rme( cc, y1/x1   );
-yy=katee( xx, cc );
+    cc=distancepac( 0, 0, x2, y2  );
+    xx=rme( cc, y1/x1   );
+    yy=katee( xx, cc );
 
-xvas=xx;
-yvas=yy;
+    xvas=xx;
+    yvas=yy;
 
 
     //return tul;
@@ -221,7 +221,7 @@ double uvas( double x1, double y1, double x2, double y2 )
 
 void vektminus( double x1, double y1, double x2, double y2, double &xvas, double &yvas   )
 {
-   xvas=x1-x2;
-   yvas=y1-y2;
+    xvas=x1-x2;
+    yvas=y1-y2;
 
 }

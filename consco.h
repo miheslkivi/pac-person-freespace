@@ -72,5 +72,6 @@ void coubo( const char* name, bool val );
 void tograyscale( QPixmap* qpxm );
 
 void pathandfile( QString path, string &file );
+float randf( float lim );
 
 #endif // CONSCO_H

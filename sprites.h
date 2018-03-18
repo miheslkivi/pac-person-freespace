@@ -52,47 +52,17 @@
  */
 
 
-
-
-
 #ifndef __SPRITES_H__
 #define __SPRITES_H__
 using namespace std;
-
-
-#include "animateditem.h"
-#include "gmu.h"
-#include"texthuds.h"
-
-
 #include <cstdlib>
-
-#define ID_ROCK_LARGE           1024
-#define ID_ROCK_MEDIUM          1025
-#define ID_ROCK_SMALL           1026
-
-#define ID_MISSILE              1030
-
-#define ID_BIT                  1040
-#define ID_EXHAUST              1041
-
-#define ID_ENERGY_POWERUP       1310
-#define ID_TELEPORT_POWERUP     1311
-#define ID_BRAKE_POWERUP        1312
-#define ID_SHIELD_POWERUP       1313
-#define ID_SHOOT_POWERUP        1314
-
-#define ID_SHIP                 1350
-#define ID_SHIELD               1351
-
-#define MAX_SHIELD_AGE          350
-#define MAX_POWERUP_AGE         700
-#define MAX_MISSILE_AGE         250
 #include<cmath>
-
 #include<iostream>
 #include<QPainter>
 #include "consco.h"
+#include "animateditem.h"
+#include "gmu.h"
+#include"texthuds.h"
 
 class KMissile : public AnimatedPixmapItem
 {
@@ -107,7 +77,6 @@ public:
     }
     void setexpl( bool e ) {  expl_=e; }
     bool expl() { return expl_; }
-    virtual int type() const { return ID_MISSILE; }
 
     void growOlder() { myAge++; }
     bool expired() { return myAge > jgs_.max_missile_age; }
@@ -117,7 +86,6 @@ public:
         if ( phase == 1 )
         {
 
-            //moveBy(vx+( ( random()%14 )-7 ) , vy+ ( ( random()%14 )-7 )  );
             if( vika_==0 )
             {
 
@@ -147,7 +115,6 @@ public:
                         mislas=raddeg( atan2( vely_, velx_  )          );
                         moveBy( velx_, vely_  );
                         anglelinepac( atan2( vely_, velx_ ), 7, mx, my );
-                        //mx=vx;  my=vy;
 
                     }
                     if( myAge>10 )
@@ -214,39 +181,38 @@ private:
 
 class pacship : public AnimatedPixmapItem
 {
- public:
-   pacship ( const QList<QPixmap> &pic, QGraphicsScene *c ): AnimatedPixmapItem( pic, c )
-        { wid_=200; }
-void setgs( gsvar gsv, gsett gst ){ jgsva_=gsv;  jgst_=gst;  }
-void paint(QPainter *painter, const QStyleOptionGraphicsItem * /*option*/,
-                               QWidget * /*widget*/)
-{
-  wid_=jgst_.pacwidth;
-    if( currentFrame!=0 )
+public:
+    pacship ( const QList<QPixmap> &pic, QGraphicsScene *c ): AnimatedPixmapItem( pic, c )
+    { wid_=200; }
+    void setgs( gsvar gsv, gsett gst ){ jgsva_=gsv;  jgst_=gst;  }
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem * /*option*/,
+               QWidget * /*widget*/)
     {
-    painter->drawPixmap(0, 0, frames.at(currentFrame).pixmap );
+        wid_=jgst_.pacwidth;
+        if( currentFrame!=0 )
+        {
+            painter->drawPixmap(0, 0, frames.at(currentFrame).pixmap );
+        }
+        else
+        {
+            QColor edc=jgst_.pacshipcol;
+            edc.setAlpha( edc.alpha()/2 );
+            QPen reuk(  edc );
+            reuk.setWidth( 1 );
+            painter->setPen( reuk );
+
+            painter->setBrush( QBrush( jgst_.pacshipcol, Qt::SolidPattern  )	  );
+            float pla=0;
+            //painter->drawEllipse( pla, pla, wid_, wid_  );
+            painter->drawPie( pla, pla, wid_, wid_, ( 90-( jgst_.pacshipangle/2 ) )*16, ( jgst_.pacshipangle-360  )*16  );
+        }
     }
-    else
-    {
-    QColor edc=jgst_.pacshipcol;
-    edc.setAlpha( edc.alpha()/2 );
-    QPen reuk(  edc );
-    reuk.setWidth( 1 );
-    painter->setPen( reuk );
 
-    painter->setBrush( QBrush( jgst_.pacshipcol, Qt::SolidPattern  )	  );
-    //float pla=( wid_/-2)+jgst_.pachawidth;
-    float pla=0;
-//painter->drawEllipse( pla, pla, wid_, wid_  );
-painter->drawPie( pla, pla, wid_, wid_, ( 90-( jgst_.pacshipangle/2 ) )*16, ( jgst_.pacshipangle-360  )*16  );
-    }
-}
+private:
+    gsvar jgsva_;
+    gsett jgst_;
 
- private:
-gsvar jgsva_;
-gsett jgst_;
-
-float wid_;
+    float wid_;
 };
 
 
@@ -264,14 +230,14 @@ public:
         dia_=500;
         age_=0;
         jgs_.expvel1=24;
- jgs_.expvel2=-7;
-jgs_.expsize=11;
-jgs_.exco=33;
- jgs_.expvcg=80;
-         jgs_.expvcb=30;
-         jgs_.expvca=97;
-         jgs_.condwidth=31;
-         jgs_.condve=24;
+        jgs_.expvel2=-7;
+        jgs_.expsize=11;
+        jgs_.exco=33;
+        jgs_.expvcg=80;
+        jgs_.expvcb=30;
+        jgs_.expvca=97;
+        jgs_.condwidth=31;
+        jgs_.condve=24;
 
     }
     void setunival()
@@ -358,8 +324,8 @@ jgs_.exco=33;
             if( expck>255 or expck<0 )
             {
                 cout << endl << " sprites.h :: boom :: paint : expck " << expck << endl;
-if( expck>255 ) expck=255;
-       if( expck<0 )  expck=0;
+                if( expck>255 ) expck=255;
+                if( expck<0 )  expck=0;
 
             }
 
@@ -465,47 +431,47 @@ public:
 
         if( gva_.minevis )
         {
-        if( waiting_ )
-        {
-            if( mimine_ )
+            if( waiting_ )
             {
-                painter->drawPixmap(0, 0, frames.at(2).pixmap );
+                if( mimine_ )
+                {
+                    painter->drawPixmap(0, 0, frames.at(2).pixmap );
 
+                }
+                else
+                {
+                    painter->drawPixmap(0, 0, frames.at(0).pixmap );
+                }
             }
             else
             {
-                painter->drawPixmap(0, 0, frames.at(0).pixmap );
+                if( mimine_ )
+                {
+                    painter->drawPixmap(0, 0, frames.at(3).pixmap );
+
+                }
+                else
+                {
+                    painter->drawPixmap(0, 0, frames.at(1).pixmap );
+                }
             }
-        }
-        else
-        {
-            if( mimine_ )
+
+
+            if( spotsgh_==1 and jgs_.minechangedbyghost )
             {
-                painter->drawPixmap(0, 0, frames.at(3).pixmap );
-
+                painter->drawEllipse( 0, 0, dia_ , dia_ );
             }
-            else
+            if( spotsghlios_==1 and jgs_.minechangedbyghost  )
             {
-                painter->drawPixmap(0, 0, frames.at(1).pixmap );
+                painter->setPen( jgs_.minespotsghlioscol );
+                painter->setBrush( jgs_.minespotsghliosbrushcol );
+                painter->drawEllipse( 5, 5, dia_-10 , dia_-10 );
             }
-        }
-
-
-        if( spotsgh_==1 and jgs_.minechangedbyghost )
-        {
-            painter->drawEllipse( 0, 0, dia_ , dia_ );
-        }
-        if( spotsghlios_==1 and jgs_.minechangedbyghost  )
-        {
-            painter->setPen( jgs_.minespotsghlioscol );
-            painter->setBrush( jgs_.minespotsghliosbrushcol );
-            painter->drawEllipse( 5, 5, dia_-10 , dia_-10 );
-        }
 
         }
         //painter->drawRect( boundingRect() );
 
-  /*      painter->setPen( Qt::white );
+        /*      painter->setPen( Qt::white );
       painter->drawPoint( 10, 10 );
       painter->setPen( Qt::cyan );
       painter->drawPoint( jgs_.minehawidth, jgs_.minehawidth );

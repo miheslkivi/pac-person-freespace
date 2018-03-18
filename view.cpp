@@ -85,7 +85,7 @@ using namespace std;
 #include "pacsettings.h"
 #include"pacinit.h"
 
-#define REFRESH_DELAY           33
+//#define REFRESH_DELAY           33
 #define SHIP_STEPS              360
 #define MAX_SHIP_SPEED		18  //12
 
@@ -129,10 +129,7 @@ QByteArray anqba( charintunion sis)
 pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
     : QOpenGLWidget( parent) ,     fieldtt_(  ),  viewtt_( /* &fieldtt_, */ this ) ,  jghosthq_(  )
 {
-    //   fieldtt_( 1,1,200,200 ) ;
-    //QGraphicsView viewtt_(&fieldtt_, this);
-
-    srand( time(NULL) );
+     srand( time(NULL) );
 
     vnofa_=vnofa;
     takeset();
@@ -189,8 +186,6 @@ pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
 
 
     QPixmap pm2;
-    // pm2.load( jgsett_.overlaypic.c_str() );
-
 
     string overlp=vnofa_.filespath.toStdString()+jgsett_.overlaypic;
     jgsett_.overlaypic=overlp;
@@ -235,8 +230,6 @@ pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
     fieldtt_.setSceneRect( backim_.rect().adjusted( -jgsett_.margin, -jgsett_.margin, jgsett_.margin, jgsett_.margin   )   );
     viewtt_.setScene( &fieldtt_ );
 
-    //painter.drawRect(  fieldtt_.sceneRect().adjusted( 111, 111, -111, -111  ) );
-
     scenerectindicator_= new QGraphicsRectItem( fieldtt_.sceneRect() );
     //fieldtt_.addItem( scenerectindicator_  );
     scenerectindicator_->setBrush( QColor( 100, 50, 50, 120) );
@@ -273,22 +266,24 @@ pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
 
     fcount_=0;
 
-    pathandfile( vnofa_.filespath, jgsett_.ghostpicn  );
-    QPixmap aavepng( jgsett_.ghostpicn.c_str() );
-    jgsett_.ghostwidth=aavepng.width();
+    pathandfile( vnofa_.filespath, jgsett_.ghostpica  );
+    pathandfile( vnofa_.filespath, jgsett_.ghostpicb  );
+    QPixmap ghostpng1( jgsett_.ghostpica.c_str() );
+    QPixmap ghostpng2( jgsett_.ghostpicb.c_str() );
+
+    jgsett_.ghostwidth=ghostpng1.width();
     jgsett_.ghosthawidth=jgsett_.ghostwidth/2;
     atau_.clear();
-    atau_.push_back( aavepng );
+    atau_.push_back( ghostpng1 );
+    atau_.push_back( ghostpng2 );
 
 
 
 
-
-    refreshRate = REFRESH_DELAY;
+    refreshRate =  jgsett_.refresh_delay;
 
     initialized_ = readSprites();
 
-    //  shieldTimer = new QTimer( this );
 
     tektimer_= new QTimer( this );
     tektimer_->start(1000);
@@ -308,8 +303,6 @@ pacview_widget::pacview_widget( gsvar &vnofa, QWidget *parent)
 
     inserver->listen( jgsett_.server_in );
     outserver->listen( jgsett_.server_out );
-
-
 
     cout << " rem=" << outserver->removeServer( jgsett_.server_out ) << " -- " << endl;
     cout << " rem=" << inserver->removeServer( jgsett_.server_in ) << " -- " << endl;
@@ -541,7 +534,9 @@ void pacview_widget::newGame()
     }
 
     if ( mTimerId < 0 )
-        mTimerId = startTimer( REFRESH_DELAY );
+     //   mTimerId = startTimer( REFRESH_DELAY );
+    mTimerId = startTimer( jgsett_.refresh_delay );
+
     emit updateVitals();
 
     hud_=1;
@@ -563,7 +558,8 @@ void pacview_widget::newGame()
 void pacview_widget::endGame()
 {
     qDeleteAll(missiles);  missiles.clear();
-
+    cout << endl << " game over " << endl;
+    exit(0);
 
 }
 
@@ -588,7 +584,8 @@ void pacview_widget::pause( bool pau )
     else
         if ( mPaused && !pau )
         {
-            mTimerId = startTimer( REFRESH_DELAY );
+          //  mTimerId = startTimer( REFRESH_DELAY );
+            mTimerId = startTimer( jgsett_.refresh_delay );
 
         }
 
@@ -1052,13 +1049,11 @@ void pacview_widget::timerEvent( QTimerEvent * )
         int iter, mtc=0;
         for( iter=0 ; iter< minelis_.size() ; iter++ )
         {
-            //minelis_.at( iter )->setgsvar( vnofa_ );
             if( qpfdistance( minelis_.at( iter )->pos(), ship->pos(),
                              jgsett_.minehawidth, jgsett_.pachawidth  )<vnofa_.minegap )
             {
                 mtc=1;
                 break;
-                //             minelis_.at( iter )->setwaiting( 0 );
             }
             else
             {
@@ -1080,10 +1075,10 @@ void pacview_widget::timerEvent( QTimerEvent * )
         mine_=1;
     }
 
-    if( mine_ and ( vnofa_.mines>0 or vnofa_.missiles>0 )  )
+    if( mine_ and ( ( vnofa_.mines>0 or jgsett_.finite_mines==0 ) or vnofa_.missiles>0 )  )
     {
         jmine_=new minett( minepics_, &fieldtt_, vnofa_ );
-        if( vnofa_.mines>0 )
+        if( vnofa_.mines>0 or ( jgsett_.finite_mines==0 and vnofa_.missiles<=0  )  )
         {
             jmine_->setmi(0);
             vnofa_.mines--;
@@ -1493,9 +1488,8 @@ jhud_->hide();
         {
 
 
-            norvel_=norvel_/3;
-            norvel_=norvel_*-1;
-            pevel_=pevel_/-3;
+            norvel_=norvel_*( -jgsett_.bounce_factor );
+            pevel_=pevel_*( -jgsett_.bounce_factor );
 
             colli_=1;
         }
@@ -1833,7 +1827,7 @@ jhud_->hide();
                                                     ), jgsett_.ympy  );
 
 
-        if(  /*vnofa_.shortmsg  and vnofa_.shortmsgcou < 2 jgsett_.shortmsgcoulim */  jgsett_.shortmeson  )
+        if(   jgsett_.shortmeson  )
         {
             jhelphudshort_->show();
 
@@ -2080,6 +2074,7 @@ void pacview_widget::addghosts( const QList<QPixmap>  &aatau,
     {
         ghost *aav = new ghost( aatau,  &fieldtt_, vnofa_,  x, y );
         aav->setPos( x-jgsett_.ghosthawidth, y-jgsett_.ghosthawidth );
+        aav->setgsvar(  vnofa_, jgsett_ );
         aav->setsnumber( iter );
         QLine jsvi(x, y, 0, 0 );
         sightline ghyt;
@@ -2155,10 +2150,7 @@ void pacview_widget::processMissiles()
             (*itMissile)->setexpl(1);
             det_=0;
 
-
-
         }
-
 
         bool missileErased = false;
 
@@ -2357,11 +2349,6 @@ void pacview_widget::processShip()
             cosangle = cos( angleradtt );
             sinangle = sin( angleradtt );
 
-            //      double thrustx = cosangle/4;
-            //    double thrusty = sinangle/4;
-
-
-
             if( fabs( speed_dir ) < MAX_SHIP_SPEED and ( fabs( speed_dir )<jgsett_.speed_limiterf or !jgsett_.splon )     )
             {
 
@@ -2431,7 +2418,7 @@ void pacview_widget::processShip()
             sinangle = sin( angleb );
 
 
-            if ( !shootDelay /*&& (int)missiles.size() < mShootCount + 2 */)
+            if ( !shootDelay and ( vnofa_.missiles>0 or jgsett_.finite_missiles==0 )  )
             {
                 vnofa_.missiles--;
 

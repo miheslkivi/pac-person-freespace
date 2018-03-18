@@ -1,13 +1,9 @@
 /* This file has no source code alterations from the one that is part of Qt4 example software "Ported Asteroids"
 *
-* date appears to be 10 April 2014, but may be much older
-*
 * This file is now also part of "Pac-person freespace continuum undiscreted"
 * ( PPFCU or p-pf-scu-d ) - Copyright (C) 2018 by Mikko Heiska
 *
-*
 */
-
 
 /****************************************************************************
 **
