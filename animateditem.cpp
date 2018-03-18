@@ -89,7 +89,6 @@ void AnimatedPixmapItem::setFrame(int frame)
         currentFrame = frame % frames.size();
     }
 
-    //scene->addItem(this);
 }
 
 void AnimatedPixmapItem::advance(int phase)
@@ -99,13 +98,11 @@ void AnimatedPixmapItem::advance(int phase)
         moveBy(velx_ , vely_ );
     }
 
-
 }
 
 QRectF AnimatedPixmapItem::boundingRect() const
 {
     return frames.at(currentFrame).boundingRect;
-
 
 }
 
@@ -125,9 +122,6 @@ void AnimatedPixmapItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
 {
     painter->drawPixmap(0, 0, frames.at(currentFrame).pixmap );
 
-
-
-
 }
 
 
@@ -136,10 +130,8 @@ void AnimatedPixmapItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
 pacdirline::pacdirline(QGraphicsScene *scene): QGraphicsItem(0) /*, currentFrame(0)*/, vx(0), vy(0)
 {
-
     scene->addItem( this );
-
-    siir_=150;
+    offsetsize_=150;
 }
 
 
@@ -152,9 +144,6 @@ void pacdirline::advance(int phase)
 {
     if (phase == 1)
     {
-//         moveBy(vx , vy );
-
-
 
 
     }
@@ -177,14 +166,8 @@ void pacdirline::paint( QPainter *painter, const QStyleOptionGraphicsItem * /*op
 painter->setPen( vari );
 double xtu, ytu;
 
-    anglelinepac(  kulmr  , siir_, xtu, ytu  );
-    painter->drawLine( siir_, siir_, siir_+xtu, siir_+ytu );
-
-
-
-
-
-
+    anglelinepac(  kulmr  , offsetsize_, xtu, ytu  );
+    painter->drawLine( offsetsize_, offsetsize_, offsetsize_+xtu, offsetsize_+ytu );
 
 }
 

@@ -148,7 +148,7 @@ public:
       double anedey3() { return edey3; }
 
 void takecol( QColor vari1 ) { vari=vari1;  }
-void otapos( double xt, double yt ) { posx_=xt-siir_; posy_=yt-siir_;  setPos( posx_, posy_ ); }
+void otapos( double xt, double yt ) { posx_=xt-offsetsize_; posy_=yt-offsetsize_;  setPos( posx_, posy_ ); }
     QRectF boundingRect() const;
     //QPainterPath shape() const;
     void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -167,7 +167,7 @@ private:
     qreal vx, vy;
     QColor vari;
 QPixmap kuva;
-double kulmr, posx_, posy_, siir_;
+double kulmr, posx_, posy_, offsetsize_;
 
 double edex1, edey1;
 double edex2, edey2;
