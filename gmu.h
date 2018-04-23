@@ -221,7 +221,8 @@ struct gsett
 
     QColor meadowc, hillc, waterc, minespotsghcol, minespotsghlioscol,
     minespotsghbrushcol, pacosightlinecol, pacomsightlinecol,
-    pacshipcol, plotcol, plotpointcol, plotghpointcol, minespotsghliosbrushcol;
+    pacshipcol, plotcol, plotpointcol, plotghpointcol, minespotsghliosbrushcol,
+    mainwincol, bordercol, datalabelcol;
 
     float mardis, marboxdis, marenedis, boxdis, boxenedis, enedis, pacshipangle;
     int iniloop, helphudshorttextcount, ghostspintime, lineplot, linelen, plotgap ;

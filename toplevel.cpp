@@ -90,33 +90,44 @@
 KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
     : QMainWindow(parent)
 {
-    QWidget *border = new QWidget( this );
+    border = new QWidget( this );
     //  border->setMouseTracking(1);
-
-    QPalette palette;
-    palette.setColor(border->backgroundRole(), Qt::black);
-    border->setPalette(palette);
+    border->setAutoFillBackground(1 );
 
     setCentralWidget( border );
 
     QVBoxLayout *borderLayout = new QVBoxLayout( border );
-    borderLayout->addStretch( 1 );
+    borderLayout->addStretch( 100 );
 
-    QWidget *mainWin = new QWidget( border );
+     mainWin = new QWidget( border );
     mainWin->setFixedSize( vnofa.wwidth, vnofa.wheight );
+    mainWin->setAutoFillBackground(1 );
+
 
     // mainWin->setMouseTracking(1);
 
     borderLayout->addWidget( mainWin, 0, Qt::AlignHCenter );
 
-    borderLayout->addStretch( 1 );
+    borderLayout->addStretch( 100 );
 
     jpacview_ = new pacview_widget( vnofa, mainWin );
     jpacview_->makeCurrent();
     setAccessibleName(" toplevel-ac-n ");
     tjgsett_=jpacview_->outgsett();
 
-    //new QGLWidget(QGLFormat(QGL::SampleBuffers))
+    QPalette mainwinpal(tjgsett_.mainwincol, tjgsett_.mainwincol, QColor( 28, 18, 12 ),
+                        QColor( 4, 24, 6 ), QColor( 8, 22, 2 ), Qt::yellow, tjgsett_.mainwincol );
+
+
+    mainWin->setPalette( mainwinpal );
+    mainWin->setAutoFillBackground(1 );
+    QPalette borderpal(Qt::darkGreen, tjgsett_.bordercol, QColor( 28, 18, 18 ),
+                       QColor( 24, 64, 6 ), Qt::black, Qt::green, QColor( 8, 22, 12 ) );
+
+border->setPalette( borderpal );
+border->setAutoFillBackground(1 );
+
+    //new QGLWidget(QGLFormat(QGL::SampleBuffers ) )
 
     jpacview_->setMouseTracking(1);
     //    grabMouse(Qt::OpenHandCursor);
@@ -143,10 +154,6 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
 
     QFont labelFont( "courier", 14 );
 
-    QPalette pal(Qt::darkGreen, Qt::black, QColor( 128, 128, 128 ), QColor( 64, 64, 64 ), Qt::black, Qt::darkGreen, Qt::black);
-
-    mainWin->setPalette( pal );
-
     hb->addSpacing( 5 );
 
     // QLabel *fueltextlabel;
@@ -154,7 +161,9 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
     datalabel = new QLabel( "", mainWin );
     QFont dtfont( "courier", 17 );
     datalabel->setFont( dtfont );
-    datalabel->setPalette( pal );
+    datalabelpal=QPalette( tjgsett_.datalabelcol, tjgsett_.mainwincol, QColor( 228, 18, 128 ),
+                        QColor( 4, 4, 64 ), QColor( 8, 22, 2 ), Qt::red, tjgsett_.mainwincol );
+    datalabel->setPalette( datalabelpal );
     datalabel->setFixedWidth( 1800 );
     hb->addWidget( datalabel );
 
@@ -175,7 +184,9 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
     fueltextlabel_ = new QLabel( tr( "Fuel" ), mainWin );
     fueltextlabel_->setFont( smallFont );
     fueltextlabel_->setFixedWidth( fueltextlabel_->sizeHint().width() + 10 );
-    fueltextlabel_->setPalette( pal );
+    fueltextlabel_->setAutoFillBackground(1);
+    fueltextlabel_->setPalette( datalabelpal );
+
     hbd->addWidget( fueltextlabel_ );
 
 
@@ -186,7 +197,10 @@ KAstTopLevel::KAstTopLevel(gsvar vnofa, QWidget *parent)
     powerMeter->addColorRange( 20, QColor(160, 96, 0) );
     powerMeter->addColorRange( 70, Qt::darkGreen );
     powerMeter->setCount( 40 );
-    powerMeter->setPalette( pal );
+    powermeterpal=QPalette(Qt::gray, tjgsett_.mainwincol, QColor( 228, 18, 128 ),
+                           QColor( 4, 4, 64 ), QColor( 8, 22, 2 ), Qt::red, tjgsett_.mainwincol );
+    powerMeter->setAutoFillBackground(1);
+    powerMeter->setPalette( powermeterpal );
     powerMeter->setFixedSize( 200, 12 );
     hbd->addWidget( powerMeter );
 
@@ -386,6 +400,22 @@ void KAstTopLevel::keyPressEvent( QKeyEvent *event )
         jpacview_-> reloadconf();
         tjgsett_=jpacview_->outgsett();
         jgsvar_=jpacview_->outgsvar();
+         mainwinpal=QPalette(Qt::darkGreen, tjgsett_.mainwincol, QColor( 8, 128, 128 ),
+                            QColor( 4, 64, 64 ), QColor( 8, 22, 82 ), Qt::green, tjgsett_.mainwincol );
+
+
+        mainWin->setPalette( mainwinpal );
+        borderpal=QPalette(Qt::darkGreen, tjgsett_.bordercol, QColor( 228, 128, 128 ),
+                           QColor( 224, 64, 64 ), Qt::black, Qt::green, QColor( 8, 22, 12 ) );
+
+    border->setPalette( borderpal );
+    datalabelpal=QPalette( tjgsett_.datalabelcol, tjgsett_.mainwincol, QColor( 228, 18, 128 ),
+              QColor( 4, 4, 64 ), QColor( 8, 22, 2 ), Qt::red, tjgsett_.mainwincol );
+            datalabel->setPalette( datalabelpal );
+            powermeterpal=QPalette(Qt::gray, tjgsett_.mainwincol, QColor( 228, 18, 128 ),
+                                   QColor( 4, 4, 64 ), QColor( 8, 22, 2 ), Qt::red, tjgsett_.mainwincol );
+            powerMeter->setPalette( powermeterpal );
+            fueltextlabel_->setPalette( datalabelpal );
 
         break;
 

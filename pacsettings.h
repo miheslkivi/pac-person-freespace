@@ -287,6 +287,21 @@ void pacset( gsvar &tgsvar, gsett &jgsett, helpmes  &thelpmes )
     jgsett.visicol=QColor( jgsett.visightliner, jgsett.visightlineg, jgsett.visightlineb, jgsett.visightlinea );
     jgsett.lksicol=QColor( jgsett.lksightliner, jgsett.lksightlineg, jgsett.lksightlineb, jgsett.lksightlinea );
 
+    jgsett.mainwincol.setRed( settin_.value(  "mainwincolr" ).toInt() );
+    jgsett.mainwincol.setGreen(settin_.value( "mainwincolg" ).toInt() );
+    jgsett.mainwincol.setBlue( settin_.value( "mainwincolb" ).toInt() );
+    jgsett.mainwincol.setAlpha(settin_.value( "mainwincola" ).toInt() );
+
+    jgsett.bordercol.setRed( settin_.value(  "bordercolr" ).toInt() );
+    jgsett.bordercol.setGreen(settin_.value( "bordercolg" ).toInt() );
+    jgsett.bordercol.setBlue(settin_.value(  "bordercolb" ).toInt() );
+    jgsett.bordercol.setAlpha(settin_.value( "bordercola" ).toInt() );
+
+    jgsett.datalabelcol.setRed( settin_.value(  "datalabelcolr" ).toInt() );
+    jgsett.datalabelcol.setGreen(settin_.value( "datalabelcolg" ).toInt() );
+    jgsett.datalabelcol.setBlue(settin_.value(  "datalabelcolb" ).toInt() );
+    jgsett.datalabelcol.setAlpha(settin_.value( "datalabelcola" ).toInt() );
+
     jgsett.splon=settin_.value("speed_limiter_on").toBool() ;
 
     jgsett.exco=settin_.value("exco").toFloat();

@@ -127,6 +127,11 @@ private:
 
     QLabel *datalabel;
     QLabel *fueltextlabel_;
+    QWidget *mainWin;
+    QWidget *border;
+    QPalette mainwinpal, borderpal, datalabelpal, powermeterpal;
+
+
     bool   sound;
 
     // waiting for user to press Enter to launch a ship
