@@ -396,7 +396,10 @@ void helphudsh::paint( QPainter *painter, const QStyleOptionGraphicsItem * /*opt
                 }
                 if( mesint==6 )
                 {
-                    tex+="  Get "+QString::number( jgsett_.collectgoal )+ " berries as fast as possible ";
+                         char htm[1234];
+
+                    sprintf( htm, jhelpm_.htexli.at( mesint ).toLatin1(),  jgsett_.collectgoal  );
+                    tex=htm;
                 }
                 if( mesint==7 )
                 {
@@ -405,7 +408,9 @@ void helphudsh::paint( QPainter *painter, const QStyleOptionGraphicsItem * /*opt
                         retec_=  jgv_.tec ;
                         colgoalre_=1;
                     }
-                    tex+=" " +QString::number( jgsett_.collectgoal )+" reached in "+ QString::number( retec_ )+" cycles";
+                    char htm[1234];
+                    sprintf( htm, jhelpm_.htexli.at( mesint ).toLatin1(), jgsett_.collectgoal, retec_   );
+                    tex=htm;
 
                 }
 

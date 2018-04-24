@@ -3,8 +3,8 @@
  pacperson killed, reason: out of fuel
  pacperson killed, reason: traffic collision
  pacperson killed, reason: ghost
- press F1 for help
- collection goal 
+ press F1 for help.  Get %d berries as fast as possible 
+ collection goal %d reached in %d cycles
  FPS too low, rotation off
 invalid line 1
 invalid line 2
