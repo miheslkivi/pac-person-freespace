@@ -6,6 +6,9 @@ Driving and shooting game that gets some inspiration from Pac-man.
 
 It is undiscreted / de-discreted Pacman in the sense that moving-angle, velocity and both coordinates can be decimal numbers, not just whole-numbers / integers, and not just 90 degree turns.
 
+![pic](screenshots/Screenshot1.png)
+
+
 The big 10 megabyte file "pac-island-overlay.png" is not absolutely necessary, but it makes the game look nicer.
 
 Keeping view rotation on may be too CPU heavy, depending on your computer and other things. Many will prefer fixed view-angle anyway. Higher zoom and smaller window helps speed.
